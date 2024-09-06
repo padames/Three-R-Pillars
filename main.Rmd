@@ -1,0 +1,72 @@
+---
+title: "It's a feature not a bug"
+subtitle: "Coercion, recycling and sub-setting"
+author: "Pablo Adames"
+institute: "CalgaryR"
+date: "2024/09/24 (updated: `r Sys.Date()`)"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+background-image: url(https://miro.medium.com/v2/resize:fit:640/format:webp/1*UH1ZkAzN4lLeWRDSggFq6Q.jpeg)
+background-position: 50% 50%
+background-size: 600px 485px
+
+        
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+???
+
+Image credit: [It's not a bug, it's a feature! at Medium.com](https://medium.com/@T45Investments/its-not-a-bug-it-s-a-feature-ca8f65a063ee)
+
+---
+class: center, middle
+
+# When "by design" becomes an unsuspecting feature
+
+### Or when ignorance is not bliss
+
+???
+  
+Contrary to the common believe that the phase "Ignorance is bliss" means "you will be more comfortable if you don't know something"
+When it comes to R syntax you will be much better off if you are fully aware of this fundamental language design decision.
+
+---
+
+background-image: url(https://img.devrant.com/devrant/rant/r_61357_6PTYm.jpg)
+background-position: 50% 50%
+
+    
+???
+  
+Image credit: [It's not a bug, it's a feature! at devrant.com](https://devrant.com/rants/61357/it-s-not-a-bug-it-s-an-undocumented-feature)
+
+### Left is the state of disbelief when you may first encounter recycling or vectorization
+### Right may represent the state of disbelief when you first learn that this was done by design
+### Center may well be the state of belief after you learn about this features and start using them productively
+
+---
+class: center, middle
+
+# Creative [computer language] design needs to be communicated
+
+???
+  
+### Communicated is an euphemism for the more proper "taught".
+### The reason is because we are not born in communities where we learn to use computer languages since we are born like human languages  
+
+---
+
+class: center, middle
+
+# Thanks!
+
+### Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
+
