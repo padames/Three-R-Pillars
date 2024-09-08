@@ -34,8 +34,8 @@ class: center, middle
 
 ???
   
-Contrary to the common believe that the phase "Ignorance is bliss" means "you will be more comfortable if you don't know something"
-When it comes to R syntax you will be much better off if you are fully aware of these fundamental language design decisions.
+It is commonly accepted that "Ignorance is bliss" means "you will be more comfortable if you don't know something"
+However, when it comes to R syntax you will be much better off if you are fully aware of these fundamental language design decisions.
 
 ---
 
@@ -89,7 +89,25 @@ Image credit: [www.memesmonkey.com](https://www.memesmonkey.com/images/memesmonk
 ### Who does R bully/coerce and why?
 
 ---
+class: left, middle
+  
+#Types in R
 
+The fundamental values that R can represent and manipulate in the computer memory are:
+  
+```{r eval=require('DT'), tidy=FALSE, include=TRUE, echo=FALSE}
+types <- data.frame(type=c("logical", "integer", "double", "character", "complex", "raw"),
+                    examples=c("TRUE, T, FALSE, F", "2, 2L", "2.0, 43.9, 10", 
+                               "'home', \"home2\", \"123\", \"$#.\"", 
+                               "-1+i, 1i", "intToBits(2), charToRaw(\"A\")"))
+DT::datatable(
+  head(types), 
+  fillContainer = FALSE, options = list(pageLength = 6)
+)
+```
+
+
+  
 ---
 class: left, middle, inverse
 
@@ -105,7 +123,7 @@ class: left, middle, inverse
   _a plan to recycle vacant apartment buildings_
 
 ???
-Source: [Merriam Webster's online Dictionary](https://www.merriam-webster.com/dictionary/recycle)
+Source: [Merriam Webster''s online Dictionary](https://www.merriam-webster.com/dictionary/recycle)
 ---
 background-image: url(https://i.pinimg.com/736x/8a/3f/e8/8a3fe88ce369c46593ddcbf80b2570ce--really-funny-pictures-funniest-pictures.jpg)
 background-position: 50% 50%
