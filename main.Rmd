@@ -6,6 +6,7 @@ institute: "CalgaryR"
 date: "2024/09/24 (updated: `r Sys.Date()`)"
 output:
   xaringan::moon_reader:
+    css: xaringan-themer.css
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -20,6 +21,22 @@ background-size: 600px 485px
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 ```
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_accent(
+  base_color = "#3e2f5b",
+#  base_color = "#1c5253",
+#  header_font_google = google_font("Josefin Sans"),
+#  header_font_google = google_font("Noto Sans Japanese"),  
+  header_font_google = google_font("Merriweather"),
+#  text_font_google   = google_font("Montserrat", "300", "300i"),
+  text_font_google   = google_font("Raleway", "400", "300i"),
+#  code_font_google   = google_font("Fira Mono"),
+  code_font_google   = google_font("Fira Code", "400", "500")
+)
+
+```
+
 
 ???
 
@@ -54,7 +71,7 @@ Image credit: [It's not a bug, it's a feature! at devrant.com](https://devrant.c
 ---
 class: center, middle
 
-# Creative [computer language] design needs to be communicated
+## Creative [computer language] design needs to be communicated
 
 ???
   
@@ -71,7 +88,7 @@ Coercion is the act or process of persuading someone forcefully to do something 
 
 _It was vital that the elections should be free of coercion or intimidation._
 
-Synonyms: force, pressure, threats, bullying
+<span style="color:yellow">Synonyms:<span> force, pressure, threats, bullying
 
 ???
 Source: [Collins online dictionary](https://www.collinsdictionary.com/dictionary/english/coercion)
@@ -95,19 +112,49 @@ class: left, middle
 
 The fundamental values that R can represent and manipulate in the computer memory are:
   
-```{r eval=require('DT'), tidy=FALSE, include=TRUE, echo=FALSE}
+```{r eval=require('DT'), tidy=TRUE, include=TRUE, echo=FALSE}
 types <- data.frame(type=c("logical", "integer", "double", "character", "complex", "raw"),
                     examples=c("TRUE, T, FALSE, F", "2, 2L", "2.0, 43.9, 10", 
                                "'home', \"home2\", \"123\", \"$#.\"", 
                                "-1+i, 1i", "intToBits(2), charToRaw(\"A\")"))
-DT::datatable(
-  head(types), 
-  fillContainer = FALSE, options = list(pageLength = 6)
-)
+#knitr::kable( types, format = "html")
+DT::datatable( types, rownames = FALSE)
+```
+---
+class: left, middle
+
+#Data structures in R
+
+```{r data structures, echo=FALSE, results='asis'}
+library(knitr)
+Dimensions <- c("One", "Two", "Three or more")
+Homogeneous <- c("Vector", "Matrix", "Array")
+Heterogeneous <- c("List", "Data frame", "")
+
+kable( data.frame(Dimensions, Homogeneous, Heterogeneous,
+                 stringsAsFactors = FALSE),
+       caption = 'Native data structures in R according to the data type they can store and the number of dimensions they use [Advanced R, by Hadley Wickham, CRC Press, 2015, p.13].')
+```
+---
+class: left, middle
+
+#Reason R coerces data types without warning
+
+- You use a heterogeneous group of values to construct a data structure that stores homogeneous types
+--
+```{r, define-a-vector, error=TRUE, warning=TRUE}
+morning_temperatures <- c(Monday=16, Tuesday=18, Wednesday="15C") 
+typeof(morning_temperatures)
+```
+--
+- A data structure makes assumptions for you
+--
+```{r, df-turns-characters-into-factors, tidy=FALSE}
+df <- data.frame(temperatures=c(16, 18, 15, 6, 10),
+                time_of_day=c("AM", "PM", "AM", "AM", "PM"))
+str(df)
 ```
 
-
-  
 ---
 class: left, middle, inverse
 
@@ -167,5 +214,5 @@ class: center, middle
 
 # Thanks!
 
-### Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
+### Slides coerced, recycled, and subsetted via the R packages [**xaringan**](https://github.com/yihui/xaringan) and  [**xaringanthemer**](https://pkg.garrickadenbuie.com/xaringanthemer/)
 

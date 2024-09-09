@@ -5,8 +5,6 @@
     <meta charset="utf-8" />
     <meta name="author" content="Pablo Adames" />
     <script src="libs/header-attrs/header-attrs.js"></script>
-    <link href="libs/remark-css/default.css" rel="stylesheet" />
-    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
     <link href="libs/htmltools-fill/fill.css" rel="stylesheet" />
     <script src="libs/htmlwidgets/htmlwidgets.js"></script>
     <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
@@ -17,6 +15,7 @@
     <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
     <link href="libs/crosstalk/css/crosstalk.min.css" rel="stylesheet" />
     <script src="libs/crosstalk/js/crosstalk.min.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -35,7 +34,7 @@ class: center, middle, inverse, title-slide
 ### CalgaryR
 ]
 .date[
-### 2024/09/24 (updated: 2024-09-08)
+### 2024/09/24 (updated: 2024-09-09)
 ]
 
 ---
@@ -45,6 +44,8 @@ background-position: 50% 50%
 background-size: 600px 485px
 
         
+
+
 
 
 ???
@@ -80,7 +81,7 @@ Image credit: [It's not a bug, it's a feature! at devrant.com](https://devrant.c
 ---
 class: center, middle
 
-# Creative [computer language] design needs to be communicated
+## Creative [computer language] design needs to be communicated
 
 ???
   
@@ -97,7 +98,7 @@ Coercion is the act or process of persuading someone forcefully to do something 
 
 _It was vital that the elections should be free of coercion or intimidation._
 
-Synonyms: force, pressure, threats, bullying
+&lt;span style="color:yellow"&gt;Synonyms:&lt;span&gt; force, pressure, threats, bullying
 
 ???
 Source: [Collins online dictionary](https://www.collinsdictionary.com/dictionary/english/coercion)
@@ -121,11 +122,53 @@ class: left, middle
 
 The fundamental values that R can represent and manipulate in the computer memory are:
   
-<div class="datatables html-widget html-fill-item" id="htmlwidget-3f15cb344633f1abec69" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-3f15cb344633f1abec69">{"x":{"filter":"none","vertical":false,"fillContainer":false,"data":[["1","2","3","4","5","6"],["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>type<\/th>\n      <th>examples<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":6,"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"type","targets":1},{"name":"examples","targets":2}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[6,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-159ae683439c508d04ef" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-159ae683439c508d04ef">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>type<\/th>\n      <th>examples<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"examples","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+---
+class: left, middle
+
+#Data structures in R
 
 
-  
+Table: Native data structures in R according to the data type they can store and the number of dimensions they use [Advanced R, by Hadley Wickham, CRC Press, 2015, p.13].
+
+|Dimensions    |Homogeneous |Heterogeneous |
+|:-------------|:-----------|:-------------|
+|One           |Vector      |List          |
+|Two           |Matrix      |Data frame    |
+|Three or more |Array       |              |
+---
+class: left, middle
+
+#Reason R coerces data types without warning
+
+- You use a heterogeneous group of values to construct a data structure that stores homogeneous types
+--
+
+``` r
+morning_temperatures &lt;- c(Monday=16, Tuesday=18, Wednesday="15C") 
+typeof(morning_temperatures)
+```
+
+```
+## [1] "character"
+```
+--
+- A data structure makes assumptions for you
+--
+
+``` r
+df &lt;- data.frame(temperatures=c(16, 18, 15, 6, 10),
+                time_of_day=c("AM", "PM", "AM", "AM", "PM"))
+str(df)
+```
+
+```
+## 'data.frame':	5 obs. of  2 variables:
+##  $ temperatures: num  16 18 15 6 10
+##  $ time_of_day : chr  "AM" "PM" "AM" "AM" ...
+```
+
 ---
 class: left, middle, inverse
 
@@ -185,7 +228,7 @@ class: center, middle
 
 # Thanks!
 
-### Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
+### Slides coerced, recycled, and subsetted via the R packages [**xaringan**](https://github.com/yihui/xaringan) and  [**xaringanthemer**](https://pkg.garrickadenbuie.com/xaringanthemer/)
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
