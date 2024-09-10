@@ -132,21 +132,103 @@ Homogeneous <- c("Vector", "Matrix", "Array")
 Heterogeneous <- c("List", "Data frame", "")
 
 kable( data.frame(Dimensions, Homogeneous, Heterogeneous,
-                 stringsAsFactors = FALSE),
+                  stringsAsFactors = FALSE),
        caption = 'Native data structures in R according to the data type they can store and the number of dimensions they use [Advanced R, by Hadley Wickham, CRC Press, 2015, p.13].')
 ```
 ---
-class: left, middle
+class: left, top
 
-#Reason R coerces data types without warning
+#Reasons R coerces data types without warning
 
-- You use a heterogeneous group of values to construct a data structure that stores homogeneous types
 --
-```{r, define-a-vector, error=TRUE, warning=TRUE}
-morning_temperatures <- c(Monday=16, Tuesday=18, Wednesday="15C") 
+- Let's verify that a vector gets all of its elements correctly
+--
+```{r, define-a-vector, error=TRUE, tidy.opts = list(blank = T, width.cutoff = 90)}
+morning_temperatures <- c(Mon=16, Tue=18, Wed=15) 
 typeof(morning_temperatures)
 ```
 --
+- Then try with heterogeneous input...
+
+```{r, define-a-vector2, error=TRUE, tidy.opts = list(blank = T, width.cutoff = 90)}
+morning_temperatures <- c(Mon=16, Tue=18, Wed="15C") 
+typeof(morning_temperatures)
+```
+--
+A vector is designed to store elements of the same type.
+
+---
+class: left, top
+#A type hierarchy 
+
+--
+Types range from less to more general:
+--
+
+.pull-left[
+
+```{r, less-to-more-general,echo=FALSE}
+library(ggplot2)
+library(data.table)
+dataf <- data.frame(types=factor(c( "logical", "integer", "double", "character"), levels =  c("logical","integer","double","character"), ordered = TRUE), how_general=c(1,2,3,4))
+dff <- data.table::melt(as.data.table(dataf), id.var="how_general")
+names(dff)[3] <- "types"
+ggplot(dff, aes(x=types, y= how_general, group=variable)) + scale_x_discrete(limits=rev) + geom_line(arrow = arrow(type = "closed"), linewidth = 1.75) + geom_point(size = 5, color = "red") + theme(text = element_text(size = 20), axis.text.x = element_text(angle = 45, hjust = 1)) 
+  
+```
+]
+--
+.pull-right[
+
+1. Every logical can be mapped to an integer
+
+1. Every integer can be mapped to a double
+
+1. Every double can be mapped to a character
+
+Reverting these statements is impossible!
+
+]
+--
+<img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iLsvH3JlemBk/v0/-1x-1.jpg"
+     width="150px" height="150px"
+     style="position:absolute; right:200px; top:480px;">
+
+???
+
+image-source: [https://assets.bwbx.io/](https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iLsvH3JlemBk/v0/-1x-1.jpg)
+---
+
+class: left, top
+
+#R coerces to avoid losing information
+
+
+--
+
+Converting data from one type to another can be a one-way street.
+
+--
+
+Given a choice of characters and doubles to store in a vector...
+
+--
+
+###R will choose the most general type and convert all the elements to that type.
+
+???
+
+##So even a single character among thousands of doubles will turn all the numbers into characters 
+
+##All the original numbers can be coerced back from characters into numbers
+
+##Attempting that on characters that don't translate to numbers can produce missing values. NA
+
+---
+class: left, top
+
+#Reasons R coerces data types without warning
+
 - A data structure makes assumptions for you
 --
 ```{r, df-turns-characters-into-factors, tidy=FALSE}
@@ -196,7 +278,7 @@ The production of a subset.
 A set whose members are members of another set; a set contained within another set
 
 ???
-Soure: [Wiktionary](https://www.wordnik.com/words/subset)
+Source: [Wiktionary](https://www.wordnik.com/words/subset)
 
 [From WordNet 3.0 Copyright 2006 by Princeton University. All rights reserved](https://www.wordnik.com/words/subset)
 ---

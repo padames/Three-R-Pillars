@@ -34,7 +34,7 @@ class: center, middle, inverse, title-slide
 ### CalgaryR
 ]
 .date[
-### 2024/09/24 (updated: 2024-09-09)
+### 2024/09/24 (updated: 2024-09-10)
 ]
 
 ---
@@ -122,8 +122,8 @@ class: left, middle
 
 The fundamental values that R can represent and manipulate in the computer memory are:
   
-<div class="datatables html-widget html-fill-item" id="htmlwidget-159ae683439c508d04ef" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-159ae683439c508d04ef">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>type<\/th>\n      <th>examples<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"examples","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-0ed7b7a0859a8e7019c4" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-0ed7b7a0859a8e7019c4">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>type<\/th>\n      <th>examples<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"examples","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ---
 class: left, middle
 
@@ -138,15 +138,28 @@ Table: Native data structures in R according to the data type they can store and
 |Two           |Matrix      |Data frame    |
 |Three or more |Array       |              |
 ---
-class: left, middle
+class: left, top
 
-#Reason R coerces data types without warning
+#Reasons R coerces data types without warning
 
-- You use a heterogeneous group of values to construct a data structure that stores homogeneous types
+--
+- Let's verify that a vector gets all of its elements correctly
 --
 
 ``` r
-morning_temperatures &lt;- c(Monday=16, Tuesday=18, Wednesday="15C") 
+morning_temperatures &lt;- c(Mon=16, Tue=18, Wed=15) 
+typeof(morning_temperatures)
+```
+
+```
+## [1] "double"
+```
+--
+- Then try with heterogeneous input...
+
+
+``` r
+morning_temperatures &lt;- c(Mon=16, Tue=18, Wed="15C") 
 typeof(morning_temperatures)
 ```
 
@@ -154,6 +167,72 @@ typeof(morning_temperatures)
 ## [1] "character"
 ```
 --
+A vector is designed to store elements of the same type.
+
+---
+class: left, top
+#A type hierarchy 
+
+--
+Types range from less to more general:
+--
+
+.pull-left[
+
+![](main_files/figure-html/less-to-more-general-1.png)&lt;!-- --&gt;
+]
+--
+.pull-right[
+
+1. Every logical can be mapped to an integer
+
+1. Every integer can be mapped to a double
+
+1. Every double can be mapped to a character
+
+Reverting these statements is impossible!
+
+]
+--
+&lt;img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iLsvH3JlemBk/v0/-1x-1.jpg"
+     width="150px" height="150px"
+     style="position:absolute; right:200px; top:480px;"&gt;
+
+???
+
+image-source: [https://assets.bwbx.io/](https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iLsvH3JlemBk/v0/-1x-1.jpg)
+---
+
+class: left, top
+
+#R coerces to avoid losing information
+
+
+--
+
+Converting data from one type to another can be a one-way street.
+
+--
+
+Given a choice of characters and doubles to store in a vector...
+
+--
+
+###R will choose the most general type and convert all the elements to that type.
+
+???
+
+##So even a single character among thousands of doubles will turn all the numbers into characters 
+
+##All the original numbers can be coerced back from characters into numbers
+
+##Attempting that on characters that don't translate to numbers can produce missing values. NA
+
+---
+class: left, top
+
+#Reasons R coerces data types without warning
+
 - A data structure makes assumptions for you
 --
 
@@ -210,7 +289,7 @@ The production of a subset.
 A set whose members are members of another set; a set contained within another set
 
 ???
-Soure: [Wiktionary](https://www.wordnik.com/words/subset)
+Source: [Wiktionary](https://www.wordnik.com/words/subset)
 
 [From WordNet 3.0 Copyright 2006 by Princeton University. All rights reserved](https://www.wordnik.com/words/subset)
 ---
