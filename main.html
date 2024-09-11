@@ -34,7 +34,7 @@ class: center, middle, inverse, title-slide
 ### CalgaryR
 ]
 .date[
-### 2024/09/24 (updated: 2024-09-10)
+### 2024/09/24 (updated: 2024-09-11)
 ]
 
 ---
@@ -122,8 +122,8 @@ class: left, middle
 
 The fundamental values that R can represent and manipulate in the computer memory are:
   
-<div class="datatables html-widget html-fill-item" id="htmlwidget-0ed7b7a0859a8e7019c4" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-0ed7b7a0859a8e7019c4">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>type<\/th>\n      <th>examples<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"examples","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-4d204ae1830d8393f341" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-4d204ae1830d8393f341">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>type<\/th>\n      <th>examples<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"examples","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ---
 class: left, middle
 
@@ -190,7 +190,7 @@ Types range from less to more general:
 
 1. Every double can be mapped to a character
 
-Reverting these statements is impossible!
+Reversing these statements is impossible!
 
 ]
 --
@@ -218,15 +218,66 @@ Given a choice of characters and doubles to store in a vector...
 
 --
 
-###R will choose the most general type and convert all the elements to that type.
+###R will choose the most general type.
+
+--
+
+And that is a 
+&lt;img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iLsvH3JlemBk/v0/-1x-1.jpg"
+     width="200px" height="200px"
+     style="position:absolute; right:500px; top:430px;"&gt;
+---
+
+##R coerces if pushed into a corner.
+
+--
+
+
+``` r
+(temps &lt;- c(15.3, 10.7, 20.1, 16.5, "12.8C", 17.2, 19.9))
+```
+
+```
+*## [1] "15.3"  "10.7"  "20.1"  "16.5"  "12.8C" "17.2"  "19.9"
+*
+```
+
+--
+
+Now let's try to reverse the process with our own coercion
+
+
+
+``` r
+as.double(temps)
+```
+
+```
+## Warning: NAs introduced by coercion
+```
+
+```
+*## [1] 15.3 10.7 20.1 16.5   NA 17.2 19.9
+*
+```
+
+--
+
+The net effect is missing values in the vector.
+
+If we were to impute the missing value, it'd be harder because we have lost the original context. 
+
 
 ???
 
-##So even a single character among thousands of doubles will turn all the numbers into characters 
+## All elements are coerced by R into characters, the most general type
 
-##All the original numbers can be coerced back from characters into numbers
+## Recover the numbers 
 
-##Attempting that on characters that don't translate to numbers can produce missing values. NA
+## NAs are created by the reverse coercion
+
+## that is information loss
+
 
 ---
 class: left, top
@@ -313,7 +364,6 @@ class: center, middle
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
 "highlightLines": true,
 "countIncrementalSlides": false
 });

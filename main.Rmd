@@ -9,7 +9,6 @@ output:
     css: xaringan-themer.css
     lib_dir: libs
     nature:
-      highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
 ---
@@ -170,10 +169,8 @@ Types range from less to more general:
 ```{r, less-to-more-general,echo=FALSE}
 library(ggplot2)
 library(data.table)
-dataf <- data.frame(types=factor(c( "logical", "integer", "double", "character"), levels =  c("logical","integer","double","character"), ordered = TRUE), how_general=c(1,2,3,4))
-dff <- data.table::melt(as.data.table(dataf), id.var="how_general")
-names(dff)[3] <- "types"
-ggplot(dff, aes(x=types, y= how_general, group=variable)) + scale_x_discrete(limits=rev) + geom_line(arrow = arrow(type = "closed"), linewidth = 1.75) + geom_point(size = 5, color = "red") + theme(text = element_text(size = 20), axis.text.x = element_text(angle = 45, hjust = 1)) 
+datat <- data.table(types=factor(c("logical", "integer", "integer","double","double","character"), levels =  c("logical","integer","double","character"), ordered = TRUE), how_general=factor(c("most specific","somewhat specific","somewhat specific","somewhat general","somewhat general","most general"), levels=c("most specific", "somewhat specific", "somewhat general", "most general"), ordered = TRUE), transition=c("to_integer","to_integer","to_double","to_double","to_character","to_character"))
+ggplot(datat, aes(x=types, y= how_general, group=transition, color=transition))  + geom_line(arrow = arrow(type = "closed" ), linewidth = 1.75) + geom_point(size = 5, color = "red") + theme(text = element_text(size = 20), axis.text.y = element_text(angle = 0, hjust = 1), axis.text.x = element_text(angle = 45, hjust = 1), axis.title = element_blank()) 
   
 ```
 ]
@@ -186,7 +183,7 @@ ggplot(dff, aes(x=types, y= how_general, group=variable)) + scale_x_discrete(lim
 
 1. Every double can be mapped to a character
 
-Reverting these statements is impossible!
+Reversing these statements is impossible!
 
 ]
 --
@@ -214,15 +211,51 @@ Given a choice of characters and doubles to store in a vector...
 
 --
 
-###R will choose the most general type and convert all the elements to that type.
+###R will choose the most general type.
+
+--
+
+And that is a 
+<img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iLsvH3JlemBk/v0/-1x-1.jpg"
+     width="200px" height="200px"
+     style="position:absolute; right:500px; top:430px;">
+---
+
+##R coerces if pushed into a corner.
+
+--
+
+```{r, example-ceorcion-in-vector-assignment, echo=TRUE, highlight.output=T}
+(temps <- c(15.3, 10.7, 20.1, 16.5, "12.8C", 17.2, 19.9))
+```
+
+--
+
+Now let's try to reverse the process with our own coercion
+
+
+```{r, example-coercion-in-vector-reverse, echo=TRUE, echo=c(2), highlight.output=T}
+temps <- c(15.3, 10.7, 20.1, 16.5, "12.8C", 17.2, 19.9)
+as.double(temps)
+```
+
+--
+
+The net effect is missing values in the vector.
+
+If we were to impute the missing value, it'd be harder because we have lost the original context. 
+
 
 ???
 
-##So even a single character among thousands of doubles will turn all the numbers into characters 
+## All elements are coerced by R into characters, the most general type
 
-##All the original numbers can be coerced back from characters into numbers
+## Recover the numbers 
 
-##Attempting that on characters that don't translate to numbers can produce missing values. NA
+## NAs are created by the reverse coercion
+
+## that is information loss
+
 
 ---
 class: left, top
