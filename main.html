@@ -16,6 +16,7 @@
     <link href="libs/crosstalk/css/crosstalk.min.css" rel="stylesheet" />
     <script src="libs/crosstalk/js/crosstalk.min.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="extra-styles.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -34,7 +35,7 @@ class: center, middle, inverse, title-slide
 ### CalgaryR
 ]
 .date[
-### 2024/09/24 (updated: 2024-09-11)
+### 2024/09/24 (updated: 2024-09-12)
 ]
 
 ---
@@ -48,9 +49,12 @@ background-size: 600px 485px
 
 
 
+
 ???
 
-Image credit: [It's not a bug, it's a feature! at Medium.com](https://medium.com/@T45Investments/its-not-a-bug-it-s-a-feature-ca8f65a063ee)
+Image credit: [Medium.com](https://medium.com/@T45Investments/its-not-a-bug-it-s-a-feature-ca8f65a063ee)
+
+When there is a mismatch between the target and the actual preconditions for a use-case even the best of features can look like a well dressed bug! 
 
 ---
 class: center, middle
@@ -61,8 +65,8 @@ class: center, middle
 
 ???
   
-It is commonly accepted that "Ignorance is bliss" means "you will be more comfortable if you don't know something"
-However, when it comes to R syntax you will be much better off if you are fully aware of these fundamental language design decisions.
+We colloquially accept that "one will be perhaps more comfortable not knowing some things".
+However, when it comes to R syntax you will be more likely to succeed if you are fully aware of some of its key language features.
 
 ---
 
@@ -72,11 +76,15 @@ background-position: 50% 50%
     
 ???
   
-Image credit: [It's not a bug, it's a feature! at devrant.com](https://devrant.com/rants/61357/it-s-not-a-bug-it-s-an-undocumented-feature)
+Image credit: [devrant.com](https://devrant.com/rants/61357/it-s-not-a-bug-it-s-an-undocumented-feature)
 
-### Left may be the state of disbelief when you first encounter coercion and recycling 
-### Right may represent the state of disbelief when you first learn that this was done by design
-### Center may well be the state of belief after you learn about this features and start using them productively
+.pesenters-notes-small[State of...
+
+Left: disbelief when you first encounter coercion and recycling 
+
+Right: disbelief when you first learn that this was done by design
+
+Center: belief after you learn about this features and start using them productively]
 
 ---
 class: center, middle
@@ -85,8 +93,7 @@ class: center, middle
 
 ???
   
-### Communicated is an euphemism for the more proper "taught".
-### The reason is because we are not born in communities where we learn to use computer languages since we are born like human languages  
+#### Communicated is an euphemism for "taught" because we are not born using computer languages the way we use human languages  
 
 ---
 class: left, middle, inverse
@@ -102,6 +109,9 @@ _It was vital that the elections should be free of coercion or intimidation._
 
 ???
 Source: [Collins online dictionary](https://www.collinsdictionary.com/dictionary/english/coercion)
+
+####Emphasys on the Synonyms to transition into the next slide about bullying
+
 ---
 background-image: url(https://www.memesmonkey.com/images/memesmonkey/3f/3fdbeaef7fb6720bf647b9e9e98df91d.jpeg)
 background-position: 50% 50%
@@ -111,19 +121,25 @@ background-color: Black
 
 Image credit: [www.memesmonkey.com](https://www.memesmonkey.com/images/memesmonkey/3f/3fdbeaef7fb6720bf647b9e9e98df91d.jpeg)
 
-### So R is a bully.
+#### Who does R bully/coerce and why?
 
-### Who does R bully/coerce and why?
+#### The next slides introduce the context to explain it
 
 ---
 class: left, middle
   
-#Types in R
+#Data types in R
 
 The fundamental values that R can represent and manipulate in the computer memory are:
   
-<div class="datatables html-widget html-fill-item" id="htmlwidget-4d204ae1830d8393f341" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-4d204ae1830d8393f341">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>type<\/th>\n      <th>examples<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"examples","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-21a8f867c5d8ba061da6" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-21a8f867c5d8ba061da6">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>type<\/th>\n      <th>examples<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"examples","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+???
+
+###Every R object has a type
+
+Here are the base R types
+
 ---
 class: left, middle
 
@@ -137,36 +153,92 @@ Table: Native data structures in R according to the data type they can store and
 |One           |Vector      |List          |
 |Two           |Matrix      |Data frame    |
 |Three or more |Array       |              |
----
-class: left, top
+???
+####Values are stored in data structures to keep them organized in memory
+####Data structures make it easier to operate on values
 
-#Reasons R coerces data types without warning
+---
+class: top, left
+
+#Coercion during data assignment 
+
+???
+#### With R's basic data types and data structures under our belt we are in a position to tackle coercion
+#### Here are two examples of when it is used to decide how data is put into data structure 
+
+--
+
+Our data must go into data structures in memory
+
+--
+
+Two cases of interest arise:
+
+--
+
+1. Input data do not meet the requirements of the data structure
+
+--
+
+2. Input data type is unspecified
+
+---
+
+##Input data do not meet the requirements of the data structure
 
 --
 - Let's verify that a vector gets all of its elements correctly
 --
 
 ``` r
-morning_temperatures &lt;- c(Mon=16, Tue=18, Wed=15) 
+(morning_temperatures &lt;- c(Mon=16, Tue=18, Wed=15)) 
+```
+
+```
+## Mon Tue Wed 
+##  16  18  15
+```
+--
+
+``` r
 typeof(morning_temperatures)
 ```
 
 ```
-## [1] "double"
+*## [1] "double"
+*
 ```
+
+
+---
+
+##Input data do not meet the requirements of the data structure
+
 --
-- Then try with heterogeneous input...
+- Now let's try with heterogeneous input...
 
 
 ``` r
-morning_temperatures &lt;- c(Mon=16, Tue=18, Wed="15C") 
+(morning_temperatures &lt;- c(Mon=16, Tue=18, Wed="15C")) 
+```
+
+```
+##   Mon   Tue   Wed 
+##  "16"  "18" "15C"
+```
+--
+
+
+``` r
 typeof(morning_temperatures)
 ```
 
 ```
-## [1] "character"
+*## [1] "character"
+*
 ```
 --
+
 A vector is designed to store elements of the same type.
 
 ---
@@ -203,29 +275,37 @@ Reversing these statements is impossible!
 image-source: [https://assets.bwbx.io/](https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iLsvH3JlemBk/v0/-1x-1.jpg)
 ---
 
-class: left, top
+class: left, top, highlight-last-item
 
-#R coerces to avoid losing information
-
-
---
-
-Converting data from one type to another can be a one-way street.
+#R coerces to preserve information
 
 --
 
-Given a choice of characters and doubles to store in a vector...
+Given a choice among heterogeneous types to store in a vector...
 
 --
 
-###R will choose the most general type.
+R will choose the most general type
 
 --
 
-And that is a 
+###R will make the choice that minimizes information loss
+
+--
+
+And that can be a 
 &lt;img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iLsvH3JlemBk/v0/-1x-1.jpg"
      width="200px" height="200px"
-     style="position:absolute; right:500px; top:430px;"&gt;
+     style="position:absolute; right:450px; top:430px;"&gt;
+
+???
+
+### Elements of heterogenous data types into a data structure that requires elements of a homogenoeus type
+
+### R makes the best decision possible
+
+### The most general data type preserves information
+
 ---
 
 ##R coerces if pushed into a corner.
