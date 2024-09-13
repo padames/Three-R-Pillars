@@ -35,7 +35,7 @@ class: center, middle, inverse, title-slide
 ### CalgaryR
 ]
 .date[
-### 2024/09/24 (updated: 2024-09-12)
+### 2024/09/24 (updated: 2024-09-13)
 ]
 
 ---
@@ -54,7 +54,11 @@ background-size: 600px 485px
 
 Image credit: [Medium.com](https://medium.com/@T45Investments/its-not-a-bug-it-s-a-feature-ca8f65a063ee)
 
-When there is a mismatch between the target and the actual preconditions for a use-case even the best of features can look like a well dressed bug! 
+.presenter-notes-small[The functionality of software is commonly implemented according to a specification or its complement, the use case.
+
+Deviations from the expected or specified behaviour are called bugs.
+
+You may think of a bug as drawing more money than the balance of your bank account, unless someone already implemented a feature called overdraft.]
 
 ---
 class: center, middle
@@ -65,9 +69,10 @@ class: center, middle
 
 ???
   
-We colloquially accept that "one will be perhaps more comfortable not knowing some things".
-However, when it comes to R syntax you will be more likely to succeed if you are fully aware of some of its key language features.
+.presenter-notes-small[We colloquially accept that perhaps we would feel more comfortable not knowing some things.
 
+However, when it comes to R syntax you will be more likely to succeed if you are fully aware of some of its key language features.
+]
 ---
 
 background-image: url(https://img.devrant.com/devrant/rant/r_61357_6PTYm.jpg)
@@ -78,7 +83,7 @@ background-position: 50% 50%
   
 Image credit: [devrant.com](https://devrant.com/rants/61357/it-s-not-a-bug-it-s-an-undocumented-feature)
 
-.pesenters-notes-small[State of...
+.presenter-notes-small[State of...
 
 Left: disbelief when you first encounter coercion and recycling 
 
@@ -93,7 +98,7 @@ class: center, middle
 
 ???
   
-#### Communicated is an euphemism for "taught" because we are not born using computer languages the way we use human languages  
+.presenter-notes-small[Communicated is an euphemism for "taught" because we are not born using computer languages the way we use human languages]  
 
 ---
 class: left, middle, inverse
@@ -101,7 +106,7 @@ class: left, middle, inverse
 #Coercion (koʊɜːʳʃən )
 ###uncountable noun
 
-Coercion is the act or process of persuading someone forcefully to do something that they do not want to do.
+Coercion is the act or process of persuading someofne forcefully to do something that they do not want to do.
 
 _It was vital that the elections should be free of coercion or intimidation._
 
@@ -123,22 +128,22 @@ Image credit: [www.memesmonkey.com](https://www.memesmonkey.com/images/memesmonk
 
 #### Who does R bully/coerce and why?
 
-#### The next slides introduce the context to explain it
+#### The next slides introduce context necessary to answer this
 
 ---
 class: left, middle
   
 #Data types in R
 
-The fundamental values that R can represent and manipulate in the computer memory are:
+The fundamental values that R represents and manipulates in the computer memory:
   
-<div class="datatables html-widget html-fill-item" id="htmlwidget-21a8f867c5d8ba061da6" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-21a8f867c5d8ba061da6">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>type<\/th>\n      <th>examples<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"examples","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-a52b99983b46edb6859b" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a52b99983b46edb6859b">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>type<\/th>\n      <th>examples<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"examples","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ???
 
 ###Every R object has a type
 
-Here are the base R types
+Logical, integer, double, character
 
 ---
 class: left, middle
@@ -154,23 +159,32 @@ Table: Native data structures in R according to the data type they can store and
 |Two           |Matrix      |Data frame    |
 |Three or more |Array       |              |
 ???
-####Values are stored in data structures to keep them organized in memory
-####Data structures make it easier to operate on values
+.presenter-notes-small[Values are stored in data structures to keep them organized in memory
+
+Data structures make it easier to operate on values
+
+I will highlight that some data structures are designed to store homogeneous data types
+]
+
+---
+background-image: url(https://i.redd.it/31vv0v6r7qm01.jpg)
+background-position: 50% 50%
+background-size: contain
+
+???
+image-credit: [i.redd.it](https://i.redd.it/31vv0v6r7qm01.jpg)
+
+.presenter-notes-small[
+We deal with data structures on a daily basis, we just take them for granted!
+]
+
 
 ---
 class: top, left
 
-#Coercion during data assignment 
+#What about coercion?
 
-???
-#### With R's basic data types and data structures under our belt we are in a position to tackle coercion
-#### Here are two examples of when it is used to decide how data is put into data structure 
-
---
-
-Our data must go into data structures in memory
-
---
+Coercion emerges in R when assigning values to its data structures
 
 Two cases of interest arise:
 
@@ -182,8 +196,12 @@ Two cases of interest arise:
 
 2. Input data type is unspecified
 
----
+???
+#### With R's basic data types and data structures under our belt we are in a position to tackle coercion
+#### Here are two examples of when it is used to decide how data is put into data structure 
 
+---
+class: top, left
 ##Input data do not meet the requirements of the data structure
 
 --
@@ -241,9 +259,24 @@ typeof(morning_temperatures)
 
 A vector is designed to store elements of the same type.
 
+--
+&lt;img src="R-Basic-Data-Structures.svg"
+     width="350px" height="200px"
+     style="position:absolute; right:370px; top:480px;"&gt;
+
 ---
 class: left, top
-#A type hierarchy 
+
+#What is the logic behind this design?
+
+To fight entropy
+
+&lt;div class="tenor-gif-embed" data-postid="11277911" data-share-method="host" data-aspect-ratio="1" data-width="50%"&gt;&lt;a href="https://tenor.com/view/good-place-michael-entropy-pointless-gif-11277911"&gt;Good Place Michael GIF&lt;/a&gt;from &lt;a href="https://tenor.com/search/good+place-gifs"&gt;Good Place GIFs&lt;/a&gt;&lt;/div&gt; &lt;script type="text/javascript" async src="https://tenor.com/embed.js"&gt;&lt;/script&gt;
+
+
+---
+class: left, top
+#A data type hierarchy 
 
 --
 Types range from less to more general:
@@ -273,6 +306,7 @@ Reversing these statements is impossible!
 ???
 
 image-source: [https://assets.bwbx.io/](https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iLsvH3JlemBk/v0/-1x-1.jpg)
+
 ---
 
 class: left, top, highlight-last-item
