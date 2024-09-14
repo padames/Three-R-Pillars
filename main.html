@@ -54,7 +54,7 @@ background-size: 600px 485px
 
 Image credit: [Medium.com](https://medium.com/@T45Investments/its-not-a-bug-it-s-a-feature-ca8f65a063ee)
 
-.presenter-notes-small[The functionality of software is commonly implemented according to a specification or its complement, the use case.
+.presenter-notes-small[The functionality of software is commonly implemented according to a specification and its complement, the use case.
 
 Deviations from the expected or specified behaviour are called bugs.
 
@@ -71,7 +71,7 @@ class: center, middle
   
 .presenter-notes-small[We colloquially accept that perhaps we would feel more comfortable not knowing some things.
 
-However, when it comes to R syntax you will be more likely to succeed if you are fully aware of some of its key language features.
+However, when it comes to your R syntax journey you will be more likely to succeed if you are fully aware of some of its key features as a computer language.
 ]
 ---
 
@@ -98,8 +98,10 @@ class: center, middle
 
 ???
   
-.presenter-notes-small[Communicated is an euphemism for "taught" because we are not born using computer languages the way we use human languages]  
+.presenter-notes-small[ This results obvious, however it is not a trivial fact. R has particular ways to help humans express computation. R is a means to program a computer to build reproducible data pipelines, to ceate visualizations and to produce numerical results from the application of statistical and mathematical ideas.
 
+So let's jump into the first language feature...
+]  
 ---
 class: left, middle, inverse
 
@@ -128,7 +130,7 @@ Image credit: [www.memesmonkey.com](https://www.memesmonkey.com/images/memesmonk
 
 #### Who does R bully/coerce and why?
 
-#### The next slides introduce context necessary to answer this
+#### The next slides introduce the context necessary to answer this question
 
 ---
 class: left, middle
@@ -137,13 +139,35 @@ class: left, middle
 
 The fundamental values that R represents and manipulates in the computer memory:
   
-<div class="datatables html-widget html-fill-item" id="htmlwidget-a52b99983b46edb6859b" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-a52b99983b46edb6859b">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>type<\/th>\n      <th>examples<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"examples","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-4c3b5f3321e23f37bd76" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-4c3b5f3321e23f37bd76">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>type<\/th>\n      <th>examples<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"examples","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ???
 
-###Every R object has a type
+####Everything in R is an object, and all objects have a type
 
-Logical, integer, double, character
+.presenter-notes-small[Logical
+
+integer
+
+double
+
+character]
+
+---
+background-image: url(https://i.redd.it/31vv0v6r7qm01.jpg)
+background-position: 50% 50%
+background-size: contain
+
+???
+image-credit: [i.redd.it](https://i.redd.it/31vv0v6r7qm01.jpg)
+
+.presenter-notes-small[
+We deal with data structures on a daily basis, we just take them for granted!
+
+The data structures we use in R for daily data analysis are not usually this complex.
+
+However, they have their very specific use cases for data manipulation and algorithm implementation.
+]
 
 ---
 class: left, middle
@@ -159,25 +183,12 @@ Table: Native data structures in R according to the data type they can store and
 |Two           |Matrix      |Data frame    |
 |Three or more |Array       |              |
 ???
-.presenter-notes-small[Values are stored in data structures to keep them organized in memory
+.presenter-notes-small[Values need containers to store them while in the computer memory.
 
-Data structures make it easier to operate on values
+Data structures make this possible. Furthermore they make it expressive to operate on values.
 
-I will highlight that some data structures are designed to store homogeneous data types
+Some data structures are designed to store values of a homogeneous type
 ]
-
----
-background-image: url(https://i.redd.it/31vv0v6r7qm01.jpg)
-background-position: 50% 50%
-background-size: contain
-
-???
-image-credit: [i.redd.it](https://i.redd.it/31vv0v6r7qm01.jpg)
-
-.presenter-notes-small[
-We deal with data structures on a daily basis, we just take them for granted!
-]
-
 
 ---
 class: top, left
