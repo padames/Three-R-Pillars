@@ -130,17 +130,16 @@ class: middle, center, inverse
 ---
 class: left, middle
   
-#R uses data types to represent values
+#R uses data types to represent values in memory
 
-The fundamental values that R represents and manipulates in the memory of the computer:
-  
+
 ```{r eval=require('DT'), tidy=TRUE, include=TRUE, echo=FALSE}
 types <- data.frame(type=c("logical", "integer", "double", "character", "complex", "raw"),
-                    examples=c("TRUE, T, FALSE, F", "2, 2L", "2.0, 43.9, 10", 
+                    values=c("TRUE, T, FALSE, F", "2, 2L", "2.0, 43.9, 10", 
                                "'home', \"home2\", \"123\", \"$#.\"", 
                                "-1+i, 1i", "intToBits(2), charToRaw(\"A\")"))
 #knitr::kable( types, format = "html")
-DT::datatable( types, rownames = FALSE)
+DT::datatable( types, colnames = c("Type","Examples of values"), rownames = FALSE, style = 'auto')
 ```
 ???
 
@@ -159,7 +158,7 @@ DT::datatable( types, rownames = FALSE)
 ---
 class: inverse, middle, center
 
-##Values have data types and values are stored in data structures
+##Values are stored in data structures
 
 ---
 background-image: url(https://i.redd.it/31vv0v6r7qm01.jpg)
@@ -190,7 +189,8 @@ Heterogeneous <- c("List", "Data frame", "")
 
 kable( data.frame(Dimensions, Homogeneous, Heterogeneous,
                   stringsAsFactors = FALSE),
-       caption = 'Native data structures in R according to the data type they can store and the number of dimensions they use [Advanced R, by Hadley Wickham, CRC Press, 2015, p.13].')
+       format = 'html',
+       caption = "Native data structures in R according to the data type they can store and the number of dimensions they use [Advanced R, by Hadley Wickham, CRC Press, 2015, p.13].")
 ```
 ???
 .presenter-notes-small[Values need containers to store them while in memory.
@@ -209,6 +209,10 @@ Coercion emerges in R when assigning values to its data structures
 
 Two cases of interest arise:
 
+???
+#### With R's basic data types and data structures under our belt we are in a position to tackle coercion
+#### Here are two examples of when it is used to decide how data is put into data structure 
+
 --
 
 1. Input data do not meet the requirements of the data structure
@@ -217,9 +221,6 @@ Two cases of interest arise:
 
 2. Input data type is unspecified
 
-???
-#### With R's basic data types and data structures under our belt we are in a position to tackle coercion
-#### Here are two examples of when it is used to decide how data is put into data structure 
 
 ---
 class: top, left

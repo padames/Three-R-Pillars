@@ -35,7 +35,7 @@ class: center, middle, inverse, title-slide
 ### CalgaryR
 ]
 .date[
-### 2024/09/24 (updated: 2024-09-18)
+### 2024/09/24 (updated: 2024-09-19)
 ]
 
 ---
@@ -140,12 +140,11 @@ class: middle, center, inverse
 ---
 class: left, middle
   
-#R uses data types to represent values
+#R uses data types to represent values in memory
 
-The fundamental values that R represents and manipulates in the memory of the computer:
-  
-<div class="datatables html-widget html-fill-item" id="htmlwidget-82aededa39dce810fbe2" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-82aededa39dce810fbe2">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>type<\/th>\n      <th>examples<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"examples","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-d5694106ceef4ad15750" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-d5694106ceef4ad15750">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Type<\/th>\n      <th>Examples of values<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"values","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ???
 
 ####Everything in R is an object, and all objects have a type
@@ -163,7 +162,7 @@ The fundamental values that R represents and manipulates in the memory of the co
 ---
 class: inverse, middle, center
 
-##Values have data types and values are stored in data structures
+##Values are stored in data structures
 
 ---
 background-image: url(https://i.redd.it/31vv0v6r7qm01.jpg)
@@ -186,14 +185,33 @@ class: left, middle
 
 #Data structures in R
 
-
-Table: Native data structures in R according to the data type they can store and the number of dimensions they use [Advanced R, by Hadley Wickham, CRC Press, 2015, p.13].
-
-|Dimensions    |Homogeneous |Heterogeneous |
-|:-------------|:-----------|:-------------|
-|One           |Vector      |List          |
-|Two           |Matrix      |Data frame    |
-|Three or more |Array       |              |
+&lt;table&gt;
+&lt;caption&gt;Native data structures in R according to the data type they can store and the number of dimensions they use [Advanced R, by Hadley Wickham, CRC Press, 2015, p.13].&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Dimensions &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Homogeneous &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Heterogeneous &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; One &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Vector &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; List &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Two &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Matrix &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Data frame &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Three or more &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Array &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 ???
 .presenter-notes-small[Values need containers to store them while in memory.
 
@@ -211,6 +229,10 @@ Coercion emerges in R when assigning values to its data structures
 
 Two cases of interest arise:
 
+???
+#### With R's basic data types and data structures under our belt we are in a position to tackle coercion
+#### Here are two examples of when it is used to decide how data is put into data structure 
+
 --
 
 1. Input data do not meet the requirements of the data structure
@@ -219,9 +241,6 @@ Two cases of interest arise:
 
 2. Input data type is unspecified
 
-???
-#### With R's basic data types and data structures under our belt we are in a position to tackle coercion
-#### Here are two examples of when it is used to decide how data is put into data structure 
 
 ---
 class: top, left
