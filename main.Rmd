@@ -88,7 +88,7 @@ class: center, middle
 
 ???
   
-.presenter-notes-small[ This results obvious, however it is not a trivial fact. R has particular ways to help humans express computation. R is a means to program a computer to build reproducible data pipelines, to ceate visualizations and to produce numerical results from the application of statistical and mathematical ideas.
+.presenter-notes-small[ This sentence sounds obvious, however it is not a trivial fact. R has particular ways to help humans express computation. R as a computer program enables building reproducible data pipelines, creating visualizations, train models, do complex inference, and do statistical and mathematical calculations with ease.
 
 So let's jump into the first language feature...
 ]  
@@ -98,7 +98,7 @@ class: left, middle, inverse
 #Coercion (koʊɜːʳʃən )
 ###uncountable noun
 
-Coercion is the act or process of persuading someofne forcefully to do something that they do not want to do.
+Coercion is the act or process of persuading someone forcefully to do something that they do not want to do.
 
 _It was vital that the elections should be free of coercion or intimidation._
 
@@ -123,11 +123,16 @@ Image credit: [www.memesmonkey.com](https://www.memesmonkey.com/images/memesmonk
 #### The next slides introduce the context necessary to answer this question
 
 ---
+class: middle, center, inverse
+
+#What does R coerce and why?
+
+---
 class: left, middle
   
-#Data types in R
+#R uses data types to represent values
 
-The fundamental values that R represents and manipulates in the computer memory:
+The fundamental values that R represents and manipulates in the memory of the computer:
   
 ```{r eval=require('DT'), tidy=TRUE, include=TRUE, echo=FALSE}
 types <- data.frame(type=c("logical", "integer", "double", "character", "complex", "raw"),
@@ -141,13 +146,20 @@ DT::datatable( types, rownames = FALSE)
 
 ####Everything in R is an object, and all objects have a type
 
-.presenter-notes-small[Logical
+.presenter-notes-small[
 
-integer
+1. Logical
 
-double
+1. integer
 
-character]
+1. double
+
+1. character]
+
+---
+class: inverse, middle, center
+
+##Values have data types and values are stored in data structures
 
 ---
 background-image: url(https://i.redd.it/31vv0v6r7qm01.jpg)
@@ -181,7 +193,7 @@ kable( data.frame(Dimensions, Homogeneous, Heterogeneous,
        caption = 'Native data structures in R according to the data type they can store and the number of dimensions they use [Advanced R, by Hadley Wickham, CRC Press, 2015, p.13].')
 ```
 ???
-.presenter-notes-small[Values need containers to store them while in the computer memory.
+.presenter-notes-small[Values need containers to store them while in memory.
 
 Data structures make this possible. Furthermore they make it expressive to operate on values.
 
