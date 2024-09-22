@@ -38,6 +38,13 @@ style_mono_accent(
 ```
 ```{r, xaringan-Extras, echo=FALSE}
 library("xaringanExtra")
+if(!('emo' %in% rownames(installed.packages()))) {
+  do.call('library', list('emo'))
+} else {
+  devtools::install_github("hadley/emo")
+  do.call('library', list('emo'))
+}
+library(emo)
 ```
 
 ???
