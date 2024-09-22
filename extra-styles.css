@@ -24,3 +24,15 @@
     display: none;
 }
 
+
+.tenor-gif-embed {
+  margin: auto;
+  position: relative;
+  text-align: center;
+/*  width: 800px;
+  height: 350px;
+  margin: 70px;*/
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+}

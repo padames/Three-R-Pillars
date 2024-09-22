@@ -35,7 +35,7 @@ class: center, middle, inverse, title-slide
 ### CalgaryR
 ]
 .date[
-### 2024/09/24 (updated: 2024-09-19)
+### 2024/09/24 (updated: 2024-09-21)
 ]
 
 ---
@@ -143,8 +143,8 @@ class: left, middle
 #R uses data types to represent values in memory
 
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-d5694106ceef4ad15750" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-d5694106ceef4ad15750">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Type<\/th>\n      <th>Examples of values<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"values","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-ea2cd35e6b93917f22c7" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ea2cd35e6b93917f22c7">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Type<\/th>\n      <th>Examples of values<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"values","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ???
 
 ####Everything in R is an object, and all objects have a type
@@ -206,7 +206,7 @@ class: left, middle
    &lt;td style="text-align:left;"&gt; Data frame &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Three or more &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Three+ &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; Array &lt;/td&gt;
    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
   &lt;/tr&gt;
@@ -244,7 +244,7 @@ Two cases of interest arise:
 
 ---
 class: top, left
-##Input data do not meet the requirements of the data structure
+##When input data do not meet the requirements of the data structure
 
 --
 - Let's verify that a vector gets all of its elements correctly
@@ -268,11 +268,13 @@ typeof(morning_temperatures)
 *## [1] "double"
 *
 ```
+--
 
+####👍 `doubles` remain `doubles` after assignment 
 
 ---
 
-##Input data do not meet the requirements of the data structure
+##When input data do not meet the requirements of the data structure
 
 --
 - Now let's try with heterogeneous input...
@@ -299,29 +301,34 @@ typeof(morning_temperatures)
 ```
 --
 
-A vector is designed to store elements of the same type.
+####😮 Yes, a vector is designed to store elements of the same type.
 
 --
+
 &lt;img src="R-Basic-Data-Structures.svg"
      width="350px" height="200px"
-     style="position:absolute; right:370px; top:480px;"&gt;
+     style="position:absolute; right:370px; top:500px;"&gt;
 
 ---
-class: left, top
+class: left,top
 
-#What is the logic behind this design?
+##What is the logic behind this design?
 
-To fight entropy
+--
+
+####To fight entropy
+
+--
 
 &lt;div class="tenor-gif-embed" data-postid="11277911" data-share-method="host" data-aspect-ratio="1" data-width="50%"&gt;&lt;a href="https://tenor.com/view/good-place-michael-entropy-pointless-gif-11277911"&gt;Good Place Michael GIF&lt;/a&gt;from &lt;a href="https://tenor.com/search/good+place-gifs"&gt;Good Place GIFs&lt;/a&gt;&lt;/div&gt; &lt;script type="text/javascript" async src="https://tenor.com/embed.js"&gt;&lt;/script&gt;
 
-
+#&lt;div class="tenor-gif-embed" data-postid="11277911" data-share-method="host" data-width="50%"&gt;&lt;a href="https://tenor.com/view/good-place-michael-entropy-pointless-gif-11277911"&gt;Good Place Michael GIF&lt;/a&gt;from &lt;a href="https://tenor.com/search/good+place-gifs"&gt;Good Place GIFs&lt;/a&gt;&lt;/div&gt; &lt;script type="text/javascript" async src="https://tenor.com/embed.js"&gt;&lt;/script&gt;
 ---
 class: left, top
-#A data type hierarchy 
+#Types are hierarchical 
 
 --
-Types range from less to more general:
+####Types go from specific to general:
 --
 
 .pull-left[
@@ -353,7 +360,7 @@ image-source: [https://assets.bwbx.io/](https://assets.bwbx.io/images/users/iqjW
 
 class: left, top, highlight-last-item
 
-#R coerces to preserve information
+##R coerces to preserve information
 
 --
 
@@ -365,14 +372,14 @@ R will choose the most general type
 
 --
 
-###R will make the choice that minimizes information loss
+###This choice minimizes information loss
 
 --
 
 And that can be a 
 &lt;img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iLsvH3JlemBk/v0/-1x-1.jpg"
      width="200px" height="200px"
-     style="position:absolute; right:450px; top:430px;"&gt;
+     style="position:absolute; right:450px; top:380px;"&gt;
 
 ???
 
@@ -384,7 +391,12 @@ And that can be a
 
 ---
 
-##R coerces if pushed into a corner.
+###An experiment to show the 
+
+&lt;img src="https://i.imgflip.com/13l41e.jpg"
+     width="200px" height="70px"
+     style="position:absolute; right:140px; top:40px;"&gt;
+
 
 --
 
@@ -402,6 +414,7 @@ And that can be a
 
 Now let's try to reverse the process with our own coercion
 
+--
 
 
 ``` r
@@ -419,9 +432,9 @@ as.double(temps)
 
 --
 
-The net effect is missing values in the vector.
+####The net effect is introducing `missing values`
 
-If we were to impute the missing value, it'd be harder because we have lost the original context. 
+If we were to impute them, it'd be harder because we have lost the original context. 
 
 
 ???
@@ -438,9 +451,9 @@ If we were to impute the missing value, it'd be harder because we have lost the 
 ---
 class: left, top
 
-#Reasons R coerces data types without warning
+##The other reasons R coerces data types without warning
 
-- A data structure makes assumptions for you
+- The input data type is unspecified
 --
 
 ``` r

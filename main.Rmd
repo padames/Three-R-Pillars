@@ -183,7 +183,7 @@ class: left, middle
 
 ```{r data structures, echo=FALSE, results='asis'}
 library(knitr)
-Dimensions <- c("One", "Two", "Three or more")
+Dimensions <- c("One", "Two", "Three+")
 Homogeneous <- c("Vector", "Matrix", "Array")
 Heterogeneous <- c("List", "Data frame", "")
 
@@ -224,7 +224,7 @@ Two cases of interest arise:
 
 ---
 class: top, left
-##Input data do not meet the requirements of the data structure
+##When input data do not meet the requirements of the data structure
 
 --
 - Let's verify that a vector gets all of its elements correctly
@@ -237,11 +237,15 @@ class: top, left
 morning_temperatures <- c(Mon=16, Tue=18, Wed=15)
 typeof(morning_temperatures)
 ```
-
+--
+```{r install-Hadley-emo, echo=FALSE, warning=FALSE, include=FALSE}
+devtools::install_github("hadley/emo")
+```
+####`r emo::ji("+1")` `doubles` remain `doubles` after assignment 
 
 ---
 
-##Input data do not meet the requirements of the data structure
+##When input data do not meet the requirements of the data structure
 
 --
 - Now let's try with heterogeneous input...
@@ -257,29 +261,34 @@ typeof(morning_temperatures)
 ```
 --
 
-A vector is designed to store elements of the same type.
+####`r emo::ji("open_mouth")` Yes, a vector is designed to store elements of the same type.
 
 --
+
 <img src="R-Basic-Data-Structures.svg"
      width="350px" height="200px"
-     style="position:absolute; right:370px; top:480px;">
+     style="position:absolute; right:370px; top:500px;">
 
 ---
-class: left, top
+class: left,top
 
-#What is the logic behind this design?
+##What is the logic behind this design?
 
-To fight entropy
+--
+
+####To fight entropy
+
+--
 
 <div class="tenor-gif-embed" data-postid="11277911" data-share-method="host" data-aspect-ratio="1" data-width="50%"><a href="https://tenor.com/view/good-place-michael-entropy-pointless-gif-11277911">Good Place Michael GIF</a>from <a href="https://tenor.com/search/good+place-gifs">Good Place GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 
-
+#<div class="tenor-gif-embed" data-postid="11277911" data-share-method="host" data-width="50%"><a href="https://tenor.com/view/good-place-michael-entropy-pointless-gif-11277911">Good Place Michael GIF</a>from <a href="https://tenor.com/search/good+place-gifs">Good Place GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 ---
 class: left, top
-#A data type hierarchy 
+#Types are hierarchical 
 
 --
-Types range from less to more general:
+####Types go from specific to general:
 --
 
 .pull-left[
@@ -317,7 +326,7 @@ image-source: [https://assets.bwbx.io/](https://assets.bwbx.io/images/users/iqjW
 
 class: left, top, highlight-last-item
 
-#R coerces to preserve information
+##R coerces to preserve information
 
 --
 
@@ -329,14 +338,14 @@ R will choose the most general type
 
 --
 
-###R will make the choice that minimizes information loss
+###This choice minimizes information loss
 
 --
 
 And that can be a 
 <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iLsvH3JlemBk/v0/-1x-1.jpg"
      width="200px" height="200px"
-     style="position:absolute; right:450px; top:430px;">
+     style="position:absolute; right:450px; top:380px;">
 
 ???
 
@@ -348,7 +357,12 @@ And that can be a
 
 ---
 
-##R coerces if pushed into a corner.
+###An experiment to show the 
+
+<img src="https://i.imgflip.com/13l41e.jpg"
+     width="200px" height="70px"
+     style="position:absolute; right:140px; top:40px;">
+
 
 --
 
@@ -360,6 +374,7 @@ And that can be a
 
 Now let's try to reverse the process with our own coercion
 
+--
 
 ```{r, example-coercion-in-vector-reverse, echo=TRUE, echo=c(2), highlight.output=T}
 temps <- c(15.3, 10.7, 20.1, 16.5, "12.8C", 17.2, 19.9)
@@ -368,9 +383,9 @@ as.double(temps)
 
 --
 
-The net effect is missing values in the vector.
+####The net effect is introducing `missing values`
 
-If we were to impute the missing value, it'd be harder because we have lost the original context. 
+If we were to impute them, it'd be harder because we have lost the original context. 
 
 
 ???
@@ -387,9 +402,9 @@ If we were to impute the missing value, it'd be harder because we have lost the 
 ---
 class: left, top
 
-#Reasons R coerces data types without warning
+##The other reasons R coerces data types without warning
 
-- A data structure makes assumptions for you
+- The input data type is unspecified
 --
 ```{r, df-turns-characters-into-factors, tidy=FALSE}
 df <- data.frame(temperatures=c(16, 18, 15, 6, 10),
