@@ -37,14 +37,28 @@ style_mono_accent(
 ```
 
 ```{r library-setup, warning=FALSE, include=FALSE, echo=FALSE}
-#library("xaringanExtra")
 libraries=c("xaringanExtra", "emo")
 for(lib in libraries) {
-  if(!('emo' %in% rownames(installed.packages()))) {
-    do.call('library', list('findemo'))
+  if((lib %in% rownames(installed.packages()))) {
+    do.call('library', list(lib))
   } else {
-    devtools::install_github("hadley/emo")
-    do.call('library', list('emo'))
+    tryCatch( 
+      {install.packages(lib)}
+      , warning = function (warn) {
+        if ( lib == 'emo') {
+          devtools::install_github("hadley/emo")
+        }
+      }
+      , error = function(err) {
+        if (lib == "emo") {
+          devtools::install_github("hadley/emo")
+        } else if ( lib == "xaringanExtra" ) {
+          install.packages("remotes")
+          remotes::install_github("gadenbuie/xaringanExtra")
+        }
+      }
+    )
+    do.call('library', list(lib))
   }
 }
 ```
@@ -228,7 +242,7 @@ Two cases of interest arise:
 
 --
 
-2. Input data type is unspecified
+2. Data structure coercion
 
 
 ---
@@ -417,19 +431,44 @@ class: left, top
 
 ##The other reasons R coerces data types without warning
 
-- The input data type is unspecified
+- Data structure coercion
 --
-```{r, df-turns-characters-into-factors, tidy=FALSE}
-df <- data.frame(temperatures=c(16, 18, 15, 6, 10),
-                time_of_day=c("AM", "PM", "AM", "AM", "PM"))
-str(df)
+
+```{r, appending to lists, tidy=FALSE}
+new_list <- c(l1=list( v1=LETTERS[2:5],
+                       v2=letters[c(1,20)]),
+              v1=c("a","3"))
+```
+
+--
+
+```{r, class-of-result, tidy=TRUE, echo=c(2)}
+new_list <- c(l1=list( v1=LETTERS[2:5],v2=letters[c(1,20)]),v1=c("a","3"))
+class(new_list)
+```
+
+--
+
+```{r, typeof-parts, tidy=TRUE, echo=c(2)}
+new_list <- c(l1=list( v1=LETTERS[2:5],v2=letters[c(1,20)]),v1=c("a","3"))
+any(typeof(names(new_list)) != "character")
+```
+
+--
+```{r, typeof-parts-brute-force, tidy=TRUE, echo=c(2)}
+new_list <- c(l1=list( v1=LETTERS[2:5],v2=letters[c(1,20)]),v1=c("a","3"))
+c(typeof(new_list$l1.v1), typeof(new_list$l1.v2), typeof(new_list$v11), typeof(new_list$v12))
 ```
 
 
-???
-.presenter-notes-small[ Automatic string to factor conversion introduces non-reproducibility as exlained in https://developer.r-project.org/Blog/public/2020/02/16/stringsasfactors/index.html
 
-Thus the R Core meetings in Toulouse in 2019, it was decided to move towards using stringsAsFactors = FALSE by default, ideally starting with the 4.0.0 release.
+???
+.presenter-notes-small[ A vector constructor is used to append a vector to a list.
+
+The resulting data structure is a list because the list can store heterogeneous types.
+Thus it can store a vector and a list in a list.
+
+It is not the type of the elements because all of them are type character.
 ]
 
 ---
