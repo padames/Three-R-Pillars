@@ -49,10 +49,7 @@ background-size: 600px 485px
 
 
 
-```
-## Skipping install of 'emo' from a github remote, the SHA1 (3f03b114) has not changed since last install.
-##   Use `force = TRUE` to force installation
-```
+
 
 ???
 
@@ -147,8 +144,8 @@ class: left, middle
 #R uses data types to represent values in memory
 
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-fd37e5d2af5d6808c84a" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-fd37e5d2af5d6808c84a">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Type<\/th>\n      <th>Examples of values<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"values","targets":1}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-a9a61b2d214051f24bd5" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a9a61b2d214051f24bd5">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Type<\/th>\n      <th>Examples of values<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"values","targets":1}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
 ???
 
 ####Everything in R is an object, and all objects have a type
@@ -225,11 +222,11 @@ Some data structures are designed to store values of a homogeneous type
 ]
 
 ---
-class: top, left
+class: top, left, bold-last-item
 
 #What about coercion?
 
-Coercion emerges in R when assigning values to its data structures
+Coercion emerges in R when **_assigning_** values to its data structures
 
 Two cases of interest arise:
 
@@ -326,7 +323,11 @@ class: left,top
 
 &lt;div class="tenor-gif-embed" data-postid="11277911" data-share-method="host" data-aspect-ratio="1" data-width="50%"&gt;&lt;a href="https://tenor.com/view/good-place-michael-entropy-pointless-gif-11277911"&gt;Good Place Michael GIF&lt;/a&gt;from &lt;a href="https://tenor.com/search/good+place-gifs"&gt;Good Place GIFs&lt;/a&gt;&lt;/div&gt; &lt;script type="text/javascript" async src="https://tenor.com/embed.js"&gt;&lt;/script&gt;
 
-#&lt;div class="tenor-gif-embed" data-postid="11277911" data-share-method="host" data-width="50%"&gt;&lt;a href="https://tenor.com/view/good-place-michael-entropy-pointless-gif-11277911"&gt;Good Place Michael GIF&lt;/a&gt;from &lt;a href="https://tenor.com/search/good+place-gifs"&gt;Good Place GIFs&lt;/a&gt;&lt;/div&gt; &lt;script type="text/javascript" async src="https://tenor.com/embed.js"&gt;&lt;/script&gt;
+???
+.presenter-notes-small[Ted Danson starring Michael in an episode of "The Good Place" (2016–2020)
+
+The Good Place is a town where those who have been good throughout their lives go once they have passed away. Michael (Danson) is the architect who oversees the town--and this is the first one he has been in charge of creating. Eleanor (Bell) arrives at the Good Place and realizes they have her name right, but everything else is wrong. She isn't meant to be there at all. With the help of Chidi, her soul mate (Harper), Eleanor tries to right her wrongs, seeking to finally earn her spot in the Good Place]
+
 ---
 class: left, top
 #Types are hierarchical 
@@ -342,19 +343,19 @@ class: left, top
 --
 .pull-right[
 
-1. Every logical can be mapped to an integer
+1. &lt;span style="color:blue"&gt;Every&lt;span&gt; **&lt;span style="color:blue"&gt;logical&lt;span&gt;** &lt;span style="color:blue"&gt;can be mapped to an&lt;span&gt; **&lt;span style="color:blue"&gt;integer&lt;span&gt;**
 
-1. Every integer can be mapped to a double
+1. &lt;span style="color:green"&gt;Every&lt;span&gt; **&lt;span style="color:green"&gt;integer&lt;span&gt;** &lt;span style="color:green"&gt;can be mapped to a&lt;span&gt; **&lt;span style="color:green"&gt;double&lt;span&gt;**
 
-1. Every double can be mapped to a character
+1. &lt;span style="color:red"&gt;Every&lt;span&gt; **&lt;span style="color:red"&gt;double&lt;span&gt;** &lt;span style="color:red"&gt;can be mapped to a&lt;span&gt; **&lt;span style="color:red"&gt;character&lt;span&gt;**
 
 Reversing these statements is impossible!
-
 ]
+
 --
 &lt;img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iLsvH3JlemBk/v0/-1x-1.jpg"
      width="150px" height="150px"
-     style="position:absolute; right:200px; top:480px;"&gt;
+     style="position:absolute; right:200px; top:500px;"&gt;
 
 ???
 
@@ -372,7 +373,7 @@ Given a choice among heterogeneous types to store in a vector...
 
 --
 
-R will choose the most general type
+R chooses the most general type
 
 --
 
@@ -406,11 +407,11 @@ And that can be a
 
 
 ``` r
-(temps &lt;- c(15.3, 10.7, 20.1, 16.5, "12.8C", 17.2, 19.9))
+(pm_avg_temps &lt;- c(15.3, 10, 20.1, 16.5, "12.8am", 17.2, 19.9))
 ```
 
 ```
-*## [1] "15.3"  "10.7"  "20.1"  "16.5"  "12.8C" "17.2"  "19.9"
+*## [1] "15.3"   "10"     "20.1"   "16.5"   "12.8am" "17.2"   "19.9"
 *
 ```
 
@@ -422,7 +423,7 @@ Now let's try to reverse the process with our own coercion
 
 
 ``` r
-as.double(temps)
+(avg_temps &lt;- as.double(pm_avg_temps))
 ```
 
 ```
@@ -430,7 +431,7 @@ as.double(temps)
 ```
 
 ```
-*## [1] 15.3 10.7 20.1 16.5   NA 17.2 19.9
+*## [1] 15.3 10.0 20.1 16.5   NA 17.2 19.9
 *
 ```
 
@@ -447,7 +448,7 @@ If we were to impute them, it'd be harder because we have lost the original cont
 
 ## Recover the numbers 
 
-## NAs are created by the reverse coercion
+## NAs are created by the reverse coercion (Not Applicable is different from NaN)
 
 ## that is information loss
 
@@ -471,6 +472,13 @@ str(df)
 ##  $ temperatures: num  16 18 15 6 10
 ##  $ time_of_day : chr  "AM" "PM" "AM" "AM" ...
 ```
+
+
+???
+.presenter-notes-small[ Automatic string to factor conversion introduces non-reproducibility as exlained in https://developer.r-project.org/Blog/public/2020/02/16/stringsasfactors/index.html
+
+Thus the R Core meetings in Toulouse in 2019, it was decided to move towards using stringsAsFactors = FALSE by default, ideally starting with the 4.0.0 release.
+]
 
 ---
 class: left, middle, inverse

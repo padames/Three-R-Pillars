@@ -34,17 +34,19 @@ style_mono_accent(
 #  code_font_google   = google_font("Fira Mono"),
   code_font_google   = google_font("Fira Code", "400", "500")
 )
-
 ```
-```{r, xaringan-Extras, echo=FALSE}
-library("xaringanExtra")
-if(!('emo' %in% rownames(installed.packages()))) {
-  do.call('library', list('emo'))
-} else {
-  devtools::install_github("hadley/emo")
-  do.call('library', list('emo'))
+
+```{r library-setup, warning=FALSE, include=FALSE, echo=FALSE}
+#library("xaringanExtra")
+libraries=c("xaringanExtra", "emo")
+for(lib in libraries) {
+  if(!('emo' %in% rownames(installed.packages()))) {
+    do.call('library', list('findemo'))
+  } else {
+    devtools::install_github("hadley/emo")
+    do.call('library', list('emo'))
+  }
 }
-library(emo)
 ```
 
 ???
@@ -208,11 +210,11 @@ Some data structures are designed to store values of a homogeneous type
 ]
 
 ---
-class: top, left
+class: top, left, bold-last-item
 
 #What about coercion?
 
-Coercion emerges in R when assigning values to its data structures
+Coercion emerges in R when **_assigning_** values to its data structures
 
 Two cases of interest arise:
 
@@ -289,7 +291,11 @@ class: left,top
 
 <div class="tenor-gif-embed" data-postid="11277911" data-share-method="host" data-aspect-ratio="1" data-width="50%"><a href="https://tenor.com/view/good-place-michael-entropy-pointless-gif-11277911">Good Place Michael GIF</a>from <a href="https://tenor.com/search/good+place-gifs">Good Place GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 
-#<div class="tenor-gif-embed" data-postid="11277911" data-share-method="host" data-width="50%"><a href="https://tenor.com/view/good-place-michael-entropy-pointless-gif-11277911">Good Place Michael GIF</a>from <a href="https://tenor.com/search/good+place-gifs">Good Place GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+???
+.presenter-notes-small[Ted Danson starring Michael in an episode of "The Good Place" (2016–2020)
+
+The Good Place is a town where those who have been good throughout their lives go once they have passed away. Michael (Danson) is the architect who oversees the town--and this is the first one he has been in charge of creating. Eleanor (Bell) arrives at the Good Place and realizes they have her name right, but everything else is wrong. She isn't meant to be there at all. With the help of Chidi, her soul mate (Harper), Eleanor tries to right her wrongs, seeking to finally earn her spot in the Good Place]
+
 ---
 class: left, top
 #Types are hierarchical 
@@ -311,19 +317,19 @@ ggplot(datat, aes(x=types, y= how_general, group=transition, color=transition)) 
 --
 .pull-right[
 
-1. Every logical can be mapped to an integer
+1. <span style="color:blue">Every<span> **<span style="color:blue">logical<span>** <span style="color:blue">can be mapped to an<span> **<span style="color:blue">integer<span>**
 
-1. Every integer can be mapped to a double
+1. <span style="color:green">Every<span> **<span style="color:green">integer<span>** <span style="color:green">can be mapped to a<span> **<span style="color:green">double<span>**
 
-1. Every double can be mapped to a character
+1. <span style="color:red">Every<span> **<span style="color:red">double<span>** <span style="color:red">can be mapped to a<span> **<span style="color:red">character<span>**
 
 Reversing these statements is impossible!
-
 ]
+
 --
 <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iLsvH3JlemBk/v0/-1x-1.jpg"
      width="150px" height="150px"
-     style="position:absolute; right:200px; top:480px;">
+     style="position:absolute; right:200px; top:500px;">
 
 ???
 
@@ -341,7 +347,7 @@ Given a choice among heterogeneous types to store in a vector...
 
 --
 
-R will choose the most general type
+R chooses the most general type
 
 --
 
@@ -374,7 +380,7 @@ And that can be a
 --
 
 ```{r, example-ceorcion-in-vector-assignment, echo=TRUE, highlight.output=T}
-(temps <- c(15.3, 10.7, 20.1, 16.5, "12.8C", 17.2, 19.9))
+(pm_avg_temps <- c(15.3, 10, 20.1, 16.5, "12.8am", 17.2, 19.9))
 ```
 
 --
@@ -384,8 +390,8 @@ Now let's try to reverse the process with our own coercion
 --
 
 ```{r, example-coercion-in-vector-reverse, echo=TRUE, echo=c(2), highlight.output=T}
-temps <- c(15.3, 10.7, 20.1, 16.5, "12.8C", 17.2, 19.9)
-as.double(temps)
+pm_avg_temps <- c(15.3, 10, 20.1, 16.5, "12.8am", 17.2, 19.9)
+(avg_temps <- as.double(pm_avg_temps))
 ```
 
 --
@@ -401,7 +407,7 @@ If we were to impute them, it'd be harder because we have lost the original cont
 
 ## Recover the numbers 
 
-## NAs are created by the reverse coercion
+## NAs are created by the reverse coercion (Not Applicable is different from NaN)
 
 ## that is information loss
 
@@ -418,6 +424,13 @@ df <- data.frame(temperatures=c(16, 18, 15, 6, 10),
                 time_of_day=c("AM", "PM", "AM", "AM", "PM"))
 str(df)
 ```
+
+
+???
+.presenter-notes-small[ Automatic string to factor conversion introduces non-reproducibility as exlained in https://developer.r-project.org/Blog/public/2020/02/16/stringsasfactors/index.html
+
+Thus the R Core meetings in Toulouse in 2019, it was decided to move towards using stringsAsFactors = FALSE by default, ideally starting with the 4.0.0 release.
+]
 
 ---
 class: left, middle, inverse
