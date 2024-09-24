@@ -473,7 +473,7 @@ c(typeof(party_plan$items.furniture), typeof(party_plan$items.drinks), typeof(pa
 
 <img src="R-Basic-Data-Structures2.svg"
      width="350px" height="180px"
-     style="position:absolute; right:370px; top:450px;">
+     style="position:absolute; right:300px; top:480px;">
 
 ---
 class: left, middle, inverse
@@ -507,10 +507,78 @@ background-color: Black
 ???
 image credit: [i.pinimg.com](https://i.pinimg.com/736x/8a/3f/e8/8a3fe88ce369c46593ddcbf80b2570ce--really-funny-pictures-funniest-pictures.jpg)
 
+####No further words needed. R wants to be economical!
+
+---
+class: top, left, show-only-last-code-result
+
+##The Baker's budget
+
+```{r weekly-ingredients, tidy=TRUE, highlight.output=T}
+(weekly_materials <- c(flour = 12, eggs = 450, yeast = 5, salt = 35))
+```
+
+--
+```{r weeks-per-year, tidy=TRUE, highlight.output=T}
+(weeks_per_year <- rep(52.18, 4))
+```
+
+--
+
+```{r annual-budget, tidy=TRUE, highlight.output=T, echo=c(3)}
+weekly_materials <- c(flour = 12, eggs = 450, yeast = 5, salt = 35)
+weeks_per_year <- rep(52.18, 4)
+(annual_materials <- weekly_materials * weeks_per_year)
+```
+
+???
+.presenter-notes-small[
+
+R is a vectorized language.
+
+Here we are doing element-wise vector multiplication.
+
+]
 
 
+---
+class: top, left, show-only-last-code-result
+
+##The Special Week Baker's budget 
+
+```{r cake-ingredients, tidy=TRUE, highlight.output=T}
+(special_cake_contract_week <- c(flour=1.2, eggs=1.3, yeast=1.2, salt=1))
+```
+
+--
+```{r special-cake-budget, tidy=TRUE, highlight.output=T, echo=c(3)}
+weekly_materials <- c(flour = 12, eggs = 450, yeast = 5, salt = 35)
+special_cake_contract_week <- c(flour=1.2, eggs=1.3, yeast=1.2, salt=1)
+(cake_week_materials <- weekly_materials * special_cake_contract_week )
+```
+
+--
+
+```{r difference-annual-special-budget, tidy=TRUE, highlight.output=T, echo=c(4)}
+weekly_materials <- c(flour = 12, eggs = 450, yeast = 5, salt = 35)
+special_cake_contract_week <- c(flour=1.2, eggs=1.3, yeast=1.2, salt=1)
+cake_week_materials <- weekly_materials * special_cake_contract_week 
+(cake_week_materials > weekly_materials )
+```
 
 
+???
+.presenter-notes-small[
+
+There is a contract to make cakes for a week.
+
+The baker needs to estimate the materials he will require to make his regular production plus the special cake order.
+
+And we answer the question: "what materials will we require to meet that cake contract?".
+
+Why am I presenting this story to you?
+
+]
 
 ---
 class: left, middle, inverse

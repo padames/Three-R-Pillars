@@ -144,8 +144,8 @@ class: left, middle
 #R uses data types to represent values in memory
 
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-870b51798e683cd116d7" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-870b51798e683cd116d7">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Type<\/th>\n      <th>Examples of values<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"values","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-82e2f951be8ba6f40d77" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-82e2f951be8ba6f40d77">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Type<\/th>\n      <th>Examples of values<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"values","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ???
 
 ####Everything in R is an object, and all objects have a type
@@ -565,7 +565,7 @@ c(typeof(party_plan$items.furniture), typeof(party_plan$items.drinks), typeof(pa
 
 &lt;img src="R-Basic-Data-Structures2.svg"
      width="350px" height="180px"
-     style="position:absolute; right:370px; top:450px;"&gt;
+     style="position:absolute; right:300px; top:480px;"&gt;
 
 ---
 class: left, middle, inverse
@@ -599,10 +599,112 @@ background-color: Black
 ???
 image credit: [i.pinimg.com](https://i.pinimg.com/736x/8a/3f/e8/8a3fe88ce369c46593ddcbf80b2570ce--really-funny-pictures-funniest-pictures.jpg)
 
+####No further words needed. R wants to be economical!
+
+---
+class: top, left, show-only-last-code-result
+
+##The Baker's budget
 
 
+``` r
+(weekly_materials &lt;- c(flour = 12, eggs = 450, yeast = 5, salt = 35))
+```
+
+```
+*## flour  eggs yeast  salt 
+*##    12   450     5    35
+*
+```
+
+--
+
+``` r
+(weeks_per_year &lt;- rep(52.18, 4))
+```
+
+```
+*## [1] 52.18 52.18 52.18 52.18
+*
+```
+
+--
 
 
+``` r
+(annual_materials &lt;- weekly_materials * weeks_per_year)
+```
+
+```
+*##    flour     eggs    yeast     salt 
+*##   626.16 23481.00   260.90  1826.30
+*
+```
+
+???
+.presenter-notes-small[
+
+R is a vectorized language.
+
+Here we are doing element-wise vector multiplication.
+
+]
+
+
+---
+class: top, left, show-only-last-code-result
+
+##The Special Week Baker's budget 
+
+
+``` r
+(special_cake_contract_week &lt;- c(flour=1.2, eggs=1.3, yeast=1.2, salt=1))
+```
+
+```
+*## flour  eggs yeast  salt 
+*##   1.2   1.3   1.2   1.0
+*
+```
+
+--
+
+``` r
+(cake_week_materials &lt;- weekly_materials * special_cake_contract_week )
+```
+
+```
+*## flour  eggs yeast  salt 
+*##  14.4 585.0   6.0  35.0
+*
+```
+
+--
+
+
+``` r
+(cake_week_materials &gt; weekly_materials )
+```
+
+```
+*## flour  eggs yeast  salt 
+*##  TRUE  TRUE  TRUE FALSE
+*
+```
+
+
+???
+.presenter-notes-small[
+
+There is a contract to make cakes for a week.
+
+The baker needs to estimate the materials he will require to make his regular production plus the special cake order.
+
+And we answer the question: "what materials will we require to meet that cake contract?".
+
+Why am I presenting this story to you?
+
+]
 
 ---
 class: left, middle, inverse
