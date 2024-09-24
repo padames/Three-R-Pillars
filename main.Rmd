@@ -888,7 +888,6 @@ Matrix multiplication does not work like that!
 
 ]
 
-
 ---
 
 class: center, top
@@ -903,7 +902,7 @@ class: center, top
 ---
 class: left, middle, inverse
 
-#Subsetting
+#Sub-setting
 
 ###noun
 
@@ -919,6 +918,8 @@ A set whose members are members of another set; a set contained within another s
 Source: [Wiktionary](https://www.wordnik.com/words/subset)
 
 [From WordNet 3.0 Copyright 2006 by Princeton University. All rights reserved](https://www.wordnik.com/words/subset)
+
+
 ---
 background-image: url(http://www.quickmeme.com/img/06/06d85daad5e49420eee5ccefd597782ca7ad37c03a306458f5ee865e6d22a5b6.jpg)
 background-position: 50% 50%
@@ -927,6 +928,108 @@ background-color: LightGreen
 
 ???
 Image credit: [http://www.quickmeme.com](http://www.quickmeme.com/img/06/06d85daad5e49420eee5ccefd597782ca7ad37c03a306458f5ee865e6d22a5b6.jpg)
+
+---
+class: top, left, show-only-last-code-result
+
+#Vector subsetting
+
+- R is a vectorized language. There are no scalars.
+--
+
+```{r vectorized, highlight.output=TRUE}
+A <- 1
+is.vector(A)
+```
+--
+- Subsetting by position:
+
+```{r subset-by-position-setup-pos, highlight.output=TRUE}
+(X <- c(5, -1, 3, 0, -4, 1))   # a vector with 6 elements
+```
+--
+```{r subset-by-position, highlight.output=TRUE, echo=c(2)}
+X <- c(5, -1, 3, 0, -4, 1)
+X[1]     # In R, positions in a vector start at 1
+```
+
+--
+```{r subset-by-position-sequence, highlight.output=TRUE, echo=c(2)}
+X <- c(5, -1, 3, 0, -4, 1)
+X[1:3]     # the first three elements
+```
+--
+```{r subset-by-position-vector-of-positions, highlight.output=TRUE, echo=c(2)}
+X <- c(5, -1, 3, 0, -4, 1)
+X[c(1,3,6)]     # the first, third, and sixth elements
+```
+
+---
+class: top, left, show-only-last-code-result
+
+#Vector subsetting (cont.)
+
+- Subsetting by excluding positions:
+
+--
+
+```{r subset-by-position-excluding-pos-setup, highlight.output=TRUE, echo=T}
+(X <- c(5, -1, 3, 0, -4, 1))
+```
+
+--
+
+```{r subset-by-position-excluding-pos, highlight.output=TRUE, echo=c(2)}
+X <- c(5, -1, 3, 0, -4, 1)
+X[-1]     # all but the first
+```
+
+--
+
+```{r subset-by-position-excluding-pos-vector, highlight.output=TRUE, echo=c(2)}
+X <- c(5, -1, 3, 0, -4, 1)
+X[c(-1,-6)]     # all but the first and last
+```
+
+---
+class: top, left, show-only-last-code-result
+
+#Vector subsetting
+
+- Subsetting by logical masks:
+
+```{r subset-by-position-setup-logical-mask, highlight.output=TRUE}
+(X <- c(5, -1, 3, 0, -4, 1))   # a vector with 6 elements
+```
+
+--
+
+```{r subset-by-logical-mask-creation, highlight.output=TRUE, echo=c(2)}
+X <- c(5, -1, 3, 0, -4, 1)
+( is_positive <- c( X > 0 ) )
+```
+--
+
+```{r subset-by-logical-mask, highlight.output=TRUE, echo=c(3)}
+X <- c(5, -1, 3, 0, -4, 1)
+is_positive <- c( X > 0 )
+X[is_positive]
+```
+
+---
+class: top, left, show-only-last-code-result
+
+#Matrix subsetting
+
+---
+class: top, left, show-only-last-code-result
+
+#List subsetting
+
+---
+class: top, left, show-only-last-code-result
+
+#Data frame subsetting
 
 ---
 
