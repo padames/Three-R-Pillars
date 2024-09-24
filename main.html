@@ -144,8 +144,8 @@ class: left, middle
 #R uses data types to represent values in memory
 
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-1141b75b1d2f3666e526" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-1141b75b1d2f3666e526">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Type<\/th>\n      <th>Examples of values<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"values","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-3fea97e0e3767511d6d4" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-3fea97e0e3767511d6d4">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Type<\/th>\n      <th>Examples of values<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"values","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ???
 
 ####Everything in R is an object, and all objects have a type
@@ -454,18 +454,32 @@ If we were to impute them, it'd be harder because we have lost the original cont
 
 
 ---
-class: left, top
+class: left, top, show-only-last-code-result
 
-##The other reasons R coerces data types without warning
+##Another reason R coerces without warning
 
 - Data structure coercion
 --
 
 
 ``` r
-new_list &lt;- c(l1=list( v1=LETTERS[2:5],
-                       v2=letters[c(1,20)]),
-              v1=c("a","3"))
+(new_list &lt;- c(l1=list( v1=LETTERS[2:5],
+                        v2=letters[c(1,20)]),
+               v1=c("a","3")))
+```
+
+```
+## $l1.v1
+## [1] "B" "C" "D" "E"
+## 
+## $l1.v2
+## [1] "a" "t"
+## 
+## $v11
+## [1] "a"
+## 
+## $v12
+## [1] "3"
 ```
 
 --
@@ -483,16 +497,6 @@ class(new_list)
 
 
 ``` r
-any(typeof(names(new_list)) != "character")
-```
-
-```
-## [1] FALSE
-```
-
---
-
-``` r
 c(typeof(new_list$l1.v1), typeof(new_list$l1.v2), typeof(new_list$v11), typeof(new_list$v12))
 ```
 
@@ -500,16 +504,20 @@ c(typeof(new_list$l1.v1), typeof(new_list$l1.v2), typeof(new_list$v11), typeof(n
 ## [1] "character" "character" "character" "character"
 ```
 
+--
 
+&lt;img src="R-Basic-Data-Structures2.svg"
+     width="350px" height="180px"
+     style="position:absolute; right:370px; top:500px;"&gt;
 
 ???
 .presenter-notes-small[ A vector constructor is used to append a vector to a list.
 
-The resulting data structure is a list because the list can store heterogeneous types.
-Thus it can store a vector and a list in a list.
+The resulting list preserves more of the structure of the components.
 
-It is not the type of the elements because all of them are type character.
-]
+The coercion here is not about the types of the individual elements. They are all of the same type, "character".
+
+It's about chosing a more general data structure.]
 
 ---
 class: left, middle, inverse
@@ -570,7 +578,7 @@ class: center, middle
 
 # Thanks!
 
-### Slides coerced, recycled, and subsetted via the R packages [**xaringan**](https://github.com/yihui/xaringan) and  [**xaringanthemer**](https://pkg.garrickadenbuie.com/xaringanthemer/)
+### Slides coerced, recycled, and subset via the R packages [**xaringan**](https://github.com/yihui/xaringan) and  [**xaringanthemer**](https://pkg.garrickadenbuie.com/xaringanthemer/)
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
