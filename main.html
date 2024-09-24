@@ -144,8 +144,8 @@ class: left, middle
 #R uses data types to represent values in memory
 
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-dfa9c5eee7bd87b64fb5" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-dfa9c5eee7bd87b64fb5">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Type<\/th>\n      <th>Examples of values<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"values","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-a2b19b4782d6568ca4c8" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a2b19b4782d6568ca4c8">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Type<\/th>\n      <th>Examples of values<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"values","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ???
 
 ####Everything in R is an object, and all objects have a type
@@ -967,10 +967,9 @@ A * B             # [A]_3x1 x [B]_2x1 = [AB]_3x1
 *
 ```
 
-&lt;img src="agree_emojis-white-bkg.png"
-     width="185px" height="45px"
-     style="position:absolute; right:100px; top:255px;"&gt;
-
+&lt;img src="single-check_emoji-white-bkg.png"
+     width="40px" height="40px"
+     style="position:absolute; right:240px; top:255px;"&gt;
 --
 
 
@@ -1000,19 +999,73 @@ A %*% t(B)        # [A]_3x1 . [B]_1x2 = [AB]_3x3
 *
 ```
 
-&lt;img src="agree_emojis-white-bkg.png"
-     width="185px" height="45px"
-     style="position:absolute; right:100px; top:445px;"&gt;
+&lt;img src="single-check_emoji-white-bkg.png"
+     width="40px" height="40px"
+     style="position:absolute; right:240px; top:470px;"&gt;
 
 
 ---
+class: top, left, show-only-last-code-result
+
+##Matrix construction 101
+
+- To build a matrix like this:
+
+![:scale 30%](matrix.png)
 
 
+- In R we create a matrix with the built-in function `matrix()`:
 
+--
+
+
+``` r
+matrix(c(5, -1, 3, 0, -4, 1), ncol = 3, nrow = 2, byrow = T)
+```
+
+```
+*##      [,1] [,2] [,3]
+*## [1,]    5   -1    3
+*## [2,]    0   -4    1
+*
+```
+
+---
+class: top, left, show-only-last-code-result
+
+##Matrix construction 101
+
+- By default `matrix()` will use the vector to fill in the matrix in **column order**:
+
+--
+
+
+``` r
+matrix(c(5, -1, 3, 0, -4, 1), ncol = 3, nrow = 2)
+```
+
+```
+*##      [,1] [,2] [,3]
+*## [1,]    5    3   -4
+*## [2,]   -1    0    1
+*
+```
+
+--
+
+- This is a _different_ matrix from the one we wanted:
+
+![:scale 30% ](matrix.png)
 
 
 ---
+class: top, center
 
+###Column Vs row-oriented construction
+
+![:scale 70%](matrix_fill.png)
+
+---
 background-image: url(https://i.pinimg.com/736x/8a/3f/e8/8a3fe88ce369c46593ddcbf80b2570ce--really-funny-pictures-funniest-pictures.jpg)
 background-position: 50% 50%
 background-size: 680px 680px
@@ -1023,11 +1076,66 @@ image credit: [i.pinimg.com](https://i.pinimg.com/736x/8a/3f/e8/8a3fe88ce369c465
 
 ---
 
-class: top, left
+class: top, left, show-only-last-code-result
 
 ###The "waste" minimization example
 
-Multiplying 
+--
+
+
+``` r
+set.seed(673912) # arbitrary number for reproducible results
+(values &lt;- sample.int(n = 99, size = 16, replace = TRUE))
+```
+
+```
+*##  [1] 59 38 94 77 70 10  3 19 55 61 80 90 71 74 24 98
+*
+```
+--
+
+
+``` r
+(m &lt;- matrix(values, nrow = 4))
+```
+
+```
+*##      [,1] [,2] [,3] [,4]
+*## [1,]   59   70   55   71
+*## [2,]   38   10   61   74
+*## [3,]   94    3   80   24
+*## [4,]   77   19   90   98
+*
+```
+
+--
+
+
+``` r
+( zero_to_4th_row &lt;- c(1,1,1,0) )
+```
+
+```
+*## [1] 1 1 1 0
+*
+```
+
+--
+
+
+``` r
+m * zero_to_4th_row        # [m]_4x4 x [mask]_4x1 = ??
+```
+
+```
+*##      [,1] [,2] [,3] [,4]
+*## [1,]   59   70   55   71
+*## [2,]   38   10   61   74
+*## [3,]   94    3   80   24
+*## [4,]    0    0    0    0
+*
+```
+
 
 
 ???
@@ -1036,9 +1144,25 @@ Multiplying
 
 This example describes why recycling suits vectorized operations and data structures.
 
+How did this work?
+
+Matrix multiplication does not work like that!
+
 ]
 
 
+---
+
+class: center, top
+
+###Mask application explained (by recycling)
+
+.center2[
+![](matrix_multiplication.png)
+]
+
+
+---
 class: left, middle, inverse
 
 #Subsetting
@@ -1077,6 +1201,7 @@ class: center, middle
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="my-macros.js"></script>
 <script>var slideshow = remark.create({
 "highlightLines": true,
 "countIncrementalSlides": false
