@@ -1,11 +1,11 @@
-#CalgaryR Presentation
+# CalgaryR Presentation
 
 Season Opener
 
-#Three pillars of base R Syntax
+# Three pillars of base R Syntax
 
-##Coercion
+## Coercion
 
-##Recycling
+## Recycling
 
-##Subsetting
+## Subsetting
