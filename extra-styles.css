@@ -20,8 +20,30 @@
   font-weight: bold;
 }
 
+
 .show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
     display: none;
+}
+
+
+.design-decision-bug_background {
+  position: relative;
+  z-index: 1;
+}
+
+.design-decision-bug_background::before {    
+      content: "";
+      background-image: url('https://img.devrant.com/devrant/rant/r_61357_6PTYm.jpg');
+/*      background-size: cover;
+      background-position: 50% 50%; 
+      background-size: contain; */
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px; 
+      opacity: 0.075;
+      z-index: -1;
 }
 
 

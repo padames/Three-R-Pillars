@@ -515,7 +515,7 @@ class: top, left, show-only-last-code-result
 ##The Baker's budget
 
 ```{r weekly-ingredients, tidy=TRUE, highlight.output=T}
-(weekly_materials <- c(flour = 12, eggs = 450, yeast = 5, salt = 35))
+(weekly_materials <- c(flour_kg = 12, eggs_units = 450, yeast_kg = 5, salt_kg = 0.350))
 ```
 
 --
@@ -526,7 +526,7 @@ class: top, left, show-only-last-code-result
 --
 
 ```{r annual-budget, tidy=TRUE, highlight.output=T, echo=c(3)}
-weekly_materials <- c(flour = 12, eggs = 450, yeast = 5, salt = 35)
+weekly_materials <- c(flour_kg = 12, eggs_units = 450, yeast_kg = 5, salt_kg = 0.350)
 weeks_per_year <- rep(52.18, 4)
 (annual_materials <- weekly_materials * weeks_per_year)
 ```
@@ -547,12 +547,20 @@ class: top, left, show-only-last-code-result
 ##The Special Week Baker's budget 
 
 ```{r cake-ingredients, tidy=TRUE, highlight.output=T}
-(special_cake_contract_week <- c(flour=1.2, eggs=1.3, yeast=1.2, salt=1))
+special_cake_contract_week <- c(flour=1.2, eggs=1.3, yeast=1.2, salt=1)
 ```
 
 --
+
+```{r average-weekly-ingredients, tidy=TRUE, highlight.output=T, echo=c(2)}
+weekly_materials <- c(flour_kg = 12, eggs_units = 450, yeast_kg = 5, salt_kg = 0.350)
+weekly_materials
+```
+
+
+--
 ```{r special-cake-budget, tidy=TRUE, highlight.output=T, echo=c(3)}
-weekly_materials <- c(flour = 12, eggs = 450, yeast = 5, salt = 35)
+weekly_materials <- c(flour_kg = 12, eggs_units = 450, yeast_kg = 5, salt_kg = 0.350)
 special_cake_contract_week <- c(flour=1.2, eggs=1.3, yeast=1.2, salt=1)
 (cake_week_materials <- weekly_materials * special_cake_contract_week )
 ```
@@ -560,7 +568,7 @@ special_cake_contract_week <- c(flour=1.2, eggs=1.3, yeast=1.2, salt=1)
 --
 
 ```{r difference-annual-special-budget, tidy=TRUE, highlight.output=T, echo=c(4)}
-weekly_materials <- c(flour = 12, eggs = 450, yeast = 5, salt = 35)
+weekly_materials <- c(flour_kg = 12, eggs_units = 450, yeast_kg = 5, salt_kg = 0.350)
 special_cake_contract_week <- c(flour=1.2, eggs=1.3, yeast=1.2, salt=1)
 cake_week_materials <- weekly_materials * special_cake_contract_week 
 (cake_week_materials > weekly_materials )
@@ -570,17 +578,243 @@ cake_week_materials <- weekly_materials * special_cake_contract_week
 ???
 .presenter-notes-small[
 
-There is a contract to make cakes for a week.
+A contract came in to make cakes for a week.
 
-The baker needs to estimate the materials he will require to make his regular production plus the special cake order.
+The baker needs to estimate the materials he will require to make his regular production plus the additional cakes.
 
-And we answer the question: "what materials will we require to meet that cake contract?".
+And after computing it we answer the question: "what materials will we require more of to meet that cake contract for a week?".
 
 Why am I presenting this story to you?
 
 ]
 
+
 ---
+class: top, left, show-only-last-code-result
+
+##What if we made a typo?
+
+```{r cake-ingredients-typo, tidy=TRUE, highlight.output=T}
+(special_cake_contract_week <- c(flour=1.2, eggs=1.3, yeast=1.2))
+```
+
+--
+```{r special-cake-budget-typo, tidy=TRUE, highlight.output=T, echo=c(3)}
+weekly_materials <- c(flour_kg = 12, eggs_units = 450, yeast_kg = 5, salt_kg = 0.350)
+special_cake_contract_week <- c(flour=1.2, eggs=1.3, yeast=1.2)
+(cake_week_materials <- weekly_materials * special_cake_contract_week )
+```
+
+--
+
+```{r difference-annual-special-budget-typo, tidy=TRUE, highlight.output=T, echo=c(4)}
+weekly_materials <- c(flour_kg = 12, eggs_units = 450, yeast_kg = 5, salt_kg = 0.350)
+special_cake_contract_week <- c(flour=1.2, eggs=1.3, yeast=1.2)
+cake_week_materials <- weekly_materials * special_cake_contract_week 
+(cake_week_materials > weekly_materials )
+```
+
+--
+
+```{r verifying-weekly-materials, echo=c(4,5), highlight.output=T, tidy=TRUE}
+weekly_materials <- c(flour_kg = 12, eggs_units = 450, yeast_kg = 5, salt_kg = 0.350)
+special_cake_contract_week <- c(flour=1.2, eggs=1.3, yeast=1.2)
+cake_week_materials <- weekly_materials * special_cake_contract_week 
+list(average_week=weekly_materials, cake_week=cake_week_materials)
+```
+
+
+???
+.presenter-notes-small[
+
+Element-wise vector multiplication requires the same number of elements in each vector.
+
+R will reuse your input to minimise waste.
+
+The part that is surprising here is that in most other computer languages this would cause an error.
+
+]
+
+---
+class: left, middle, highlight-last-item, design-decision-bug_background
+
+
+- Element-wise vector multiplication requires the same number of elements in each vector.
+
+--
+
+- R reuses your input to minimise waste.
+
+--
+
+- The _waste_ might be the cognitive overload from having to write large, repetitive data structures   
+
+--
+
+- This is a **language design** decision
+
+
+--
+
+- Recycling suits a natively vectorized data-processing language like R
+
+--
+
+- Once you know recycling exists it becomes a very useful feature
+
+
+---
+
+<div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/px9yz9t1lHPNHjQWA9" width="110%" height="110%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/nascar-racing-2021-motorsports-px9yz9t1lHPNHjQWA9">via GIPHY</a></p>
+
+###Learning R and starting a race car...
+
+???
+Image-credit: url('https://giphy.com/gifs/nascar-racing-2021-motorsports-px9yz9t1lHPNHjQWA9')
+
+---
+
+class: center, middle, inverse
+
+##They may require an initial push...
+
+---
+
+class: top, left, show-only-last-code-result
+
+##Element-wise Vs. dot product
+
+```{r element-wise-vector-product-setup-A, echo=T, tidy=T, highlight.output=T}
+(A <- c(1, 0, 2)) # [A]_3x1
+```
+
+--
+
+```{r element-wise-vector-product-setup-B, echo=T, tidy=T, highlight.output=T}
+(B <- c(3, 3, 3)) # [B]_3x1
+```
+
+--
+
+```{r element-wise-vector-product, echo=c(3), tidy=T, highlight.output=T}
+A <- c(1, 0, 2)
+B <- c(3, 3, 3)
+A * B             # [A]_3x1 x [B]_3x1 = [AB]_3x1
+```
+
+<img src="single-check_emoji-white-bkg.png"
+     width="40px" height="40px"
+     style="position:absolute; right:230px; top:270px;">
+
+--
+
+```{r inner-dot-vector-product, echo=c(3), tidy=T, highlight.output=T}
+A <- c(1, 0, 2)
+B <- c(3, 3, 3)
+t(A) %*% B        # [A]_1x3 . [B]_3x1 = [AB]_1x1
+```
+<img src="single-check_emoji-white-bkg.png"
+     width="40px" height="40px"
+     style="position:absolute; right:230px; top:330px;">
+
+--
+
+```{r outer-dot-vector-product, echo=c(3), tidy=T, highlight.output=T}
+A <- c(1, 0, 2)
+B <- c(3, 3, 3)
+A %*% t(B)        # [A]_3x1 . [B]_1x3 = [AB]_3x3
+
+```
+<img src="single-check_emoji-white-bkg.png"
+     width="40px" height="40px"
+     style="position:absolute; right:230px; top:395px;">
+
+---
+
+class: top, left, show-only-last-code-result
+
+###Element-wise Vs. dot product (Recycled)
+
+```{r element-wise-vector-product-setup-A-recycle, echo=T, tidy=T, highlight.output=T}
+(A <- c(1, 0, 2)) # [A]_3x1
+```
+
+--
+
+```{r element-wise-vector-product-setup-B-recycle, echo=T, tidy=T, highlight.output=T}
+(B <- c(3, 3)) # [B]_2x1
+```
+
+--
+
+```{r element-wise-vector-product-recycle, echo=c(3), tidy=T, highlight.output=T}
+A <- c(1, 0, 2)
+B <- c(3, 3)
+A * B             # [A]_3x1 x [B]_2x1 = [AB]_3x1
+```
+
+<img src="agree_emojis-white-bkg.png"
+     width="185px" height="45px"
+     style="position:absolute; right:100px; top:255px;">
+
+--
+
+```{r inner-dot-vector-product-recycle, include=TRUE, eval=FALSE, highlight.output=T, tidy=T}
+A <- c(1, 0, 2)
+B <- c(3, 3)
+t(A) %*% B        # [A]_1x3 . [B]_2x1 = [AB]_1x1
+```
+<img src="dot-product-error.png"
+     width="250px" height="60px"
+     style="position:absolute; right:30px; top:340px;">
+     
+--
+
+```{r outer-dot-vector-product-recycle, eval=TRUE, include=TRUE, highlight.output=T, tidy=T}
+A <- c(1, 0, 2)
+B <- c(3, 3)
+A %*% t(B)        # [A]_3x1 . [B]_1x2 = [AB]_3x3
+```
+
+<img src="agree_emojis-white-bkg.png"
+     width="185px" height="45px"
+     style="position:absolute; right:100px; top:445px;">
+
+
+---
+
+
+
+
+
+---
+
+background-image: url(https://i.pinimg.com/736x/8a/3f/e8/8a3fe88ce369c46593ddcbf80b2570ce--really-funny-pictures-funniest-pictures.jpg)
+background-position: 50% 50%
+background-size: 680px 680px
+background-color: Black 
+
+???
+image credit: [i.pinimg.com](https://i.pinimg.com/736x/8a/3f/e8/8a3fe88ce369c46593ddcbf80b2570ce--really-funny-pictures-funniest-pictures.jpg)
+
+---
+
+class: top, left
+
+###The "waste" minimization example
+
+Multiplying 
+
+
+???
+
+.presenter-notes-small[
+
+This example describes why recycling suits vectorized operations and data structures.
+
+]
+
+
 class: left, middle, inverse
 
 #Subsetting
