@@ -429,27 +429,43 @@ If we were to impute them, it'd be harder because we have lost the original cont
 ---
 class: left, top, show-only-last-code-result
 
-##Another reason R coerces without warning
+###Another reason R coerces without warning
 
 - Data structure coercion
+
+
 --
 
-```{r, appending to lists, tidy=FALSE}
+```{r, appending to lists, tidy=FALSE, highlight.output=T}
 (new_list <- c(l1=list( v1=LETTERS[2:5],
                         v2=letters[c(1,20)]),
                v1=c("a","3")))
 ```
 
+???
+.presenter-notes-small[ 
+
+We will use a vector constructor to append a vector to a list.
+
+The result could be a vector or a list.
+
+The coercion from vector into list is not about the types of the individual elements. They are all of the same type, "character".
+
+It's about chosing a more general data structure: a list can contain a vector but not the other way around!
+
+Let's remember or basic R data structures: they also have a hierarchy!
+]
+
 --
 
-```{r, class-of-result, tidy=TRUE, echo=c(2)}
+```{r, class-of-result, tidy=TRUE, echo=c(2), highlight.output=T}
 new_list <- c(l1=list( v1=LETTERS[2:5],v2=letters[c(1,20)]),v1=c("a","3"))
-class(new_list)
+typeof(new_list)
 ```
 
 --
 
-```{r, typeof-each-element, tidy=TRUE, echo=c(2)}
+```{r, typeof-each-element, tidy=TRUE, echo=c(2), highlight.output=T}
 new_list <- c(l1=list( v1=LETTERS[2:5],v2=letters[c(1,20)]),v1=c("a","3"))
 c(typeof(new_list$l1.v1), typeof(new_list$l1.v2), typeof(new_list$v11), typeof(new_list$v12))
 ```
@@ -458,16 +474,7 @@ c(typeof(new_list$l1.v1), typeof(new_list$l1.v2), typeof(new_list$v11), typeof(n
 
 <img src="R-Basic-Data-Structures2.svg"
      width="350px" height="180px"
-     style="position:absolute; right:370px; top:500px;">
-
-???
-.presenter-notes-small[ A vector constructor is used to append a vector to a list.
-
-The resulting list preserves more of the structure of the components.
-
-The coercion here is not about the types of the individual elements. They are all of the same type, "character".
-
-It's about chosing a more general data structure.]
+     style="position:absolute; right:370px; top:450px;">
 
 ---
 class: left, middle, inverse
@@ -485,6 +492,13 @@ class: left, middle, inverse
 
 ???
 Source: [Merriam Webster''s online Dictionary](https://www.merriam-webster.com/dictionary/recycle)
+
+.presenter-notes-small[
+
+The key of recycling idea is to save from loss and to make useful what could be a reject!
+
+]
+
 ---
 background-image: url(https://i.pinimg.com/736x/8a/3f/e8/8a3fe88ce369c46593ddcbf80b2570ce--really-funny-pictures-funniest-pictures.jpg)
 background-position: 50% 50%
