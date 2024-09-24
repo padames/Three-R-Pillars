@@ -144,8 +144,8 @@ class: left, middle
 #R uses data types to represent values in memory
 
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-ff037798c26625d63d6d" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-ff037798c26625d63d6d">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Type<\/th>\n      <th>Examples of values<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"values","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-7ee8e7554090e831b91a" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-7ee8e7554090e831b91a">{"x":{"filter":"none","vertical":false,"data":[["logical","integer","double","character","complex","raw"],["TRUE, T, FALSE, F","2, 2L","2.0, 43.9, 10","'home', \"home2\", \"123\", \"$#.\"","-1+i, 1i","intToBits(2), charToRaw(\"A\")"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Type<\/th>\n      <th>Examples of values<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"name":"type","targets":0},{"name":"values","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ???
 
 ####Everything in R is an object, and all objects have a type
@@ -1336,20 +1336,220 @@ X[is_positive]
 *
 ```
 
+--
+
+
+``` r
+(is_gt_two &lt;- c(X &gt; 2) )
+```
+
+```
+*## [1]  TRUE FALSE  TRUE FALSE FALSE FALSE
+*
+```
+
+--
+
+``` r
+X[is_positive &amp; is_gt_two]
+```
+
+```
+*## [1] 5 3
+*
+```
+
+
 ---
 class: top, left, show-only-last-code-result
 
 #Matrix subsetting
+
+- Create a demo matrix
+
+
+``` r
+(M &lt;- matrix(c(1:4,4:1), nrow = 4, ncol = 4))
+```
+
+```
+*##      [,1] [,2] [,3] [,4]
+*## [1,]    1    4    1    4
+*## [2,]    2    3    2    3
+*## [3,]    3    2    3    2
+*## [4,]    4    1    4    1
+*
+```
+--
+
+
+``` r
+M[1,]  # subset the first row
+```
+
+```
+*## [1] 1 4 1 4
+*
+```
+
+--
+
+
+``` r
+M[,4]  # subset the last column
+```
+
+```
+*## [1] 4 3 2 1
+*
+```
+
+--
+
+
+``` r
+M[3:4,3:4]  # subset the bottom-right 2x2 submatrix
+```
+
+```
+*##      [,1] [,2]
+*## [1,]    3    2
+*## [2,]    4    1
+*
+```
 
 ---
 class: top, left, show-only-last-code-result
 
 #List subsetting
 
+- Create some party lists 
+
+
+``` r
+(party_items = list( drinks = c("pop", "wine", "beer", "water"),
+                    furniture = c(chairs = 8, tables = 2, hammocks = 1)))
+```
+
+```
+*## $drinks
+*## [1] "pop"   "wine"  "beer"  "water"
+*## 
+*## $furniture
+*##   chairs   tables hammocks 
+*##        8        2        1
+*
+```
+--
+
+
+``` r
+(guest_list &lt;- list(guests = c("Uncle Bob", "Friendly neighbour", "Joe Best"), invited = c(F,F,T))) 
+```
+
+```
+*## $guests
+*## [1] "Uncle Bob"          "Friendly neighbour" "Joe Best"          
+*## 
+*## $invited
+*## [1] FALSE FALSE  TRUE
+*
+```
+
 ---
 class: top, left, show-only-last-code-result
 
-#Data frame subsetting
+#List subsetting
+
+- Create the complete party lists 
+
+--
+
+
+``` r
+(to_do_list &lt;- list(guests = guest_list, items = party_items))
+```
+
+```
+*## $guests
+*## $guests$who
+*## [1] "Uncle Bob"          "Friendly neighbour" "Joe Best"          
+*## 
+*## $guests$invited
+*## [1] FALSE FALSE  TRUE
+*## 
+*## 
+*## $items
+*## $items$drinks
+*## [1] "pop"   "wine"  "beer"  "water"
+*## 
+*## $items$furniture
+*##   chairs   tables hammocks 
+*##        8        2        1
+*
+```
+
+--
+
+
+``` r
+to_do_list$items$drinks
+```
+
+```
+*## [1] "pop"   "wine"  "beer"  "water"
+*
+```
+
+--
+
+
+``` r
+to_do_list$items$furniture
+```
+
+```
+*##   chairs   tables hammocks 
+*##        8        2        1
+*
+```
+
+--
+
+How many guests have been invited?
+--
+
+
+``` r
+sum(to_do_list$guests$invited)
+```
+
+```
+*## [1] 1
+*
+```
+
+--
+
+Who is that guest?
+--
+
+
+``` r
+to_do_list$guests$who[to_do_list$guests$invited]
+```
+
+```
+*## [1] "Joe Best"
+*
+```
+
+---
+
+background-image: url('https://i.imgflip.com/123oks.jpg')
+background-position: 50% 50%
+class: center, bottom, inverse
+
 
 ---
 
@@ -1358,6 +1558,7 @@ class: center, middle
 # Thanks!
 
 ### Slides coerced, recycled, and subset via the R packages [**xaringan**](https://github.com/yihui/xaringan) and  [**xaringanthemer**](https://pkg.garrickadenbuie.com/xaringanthemer/)
+
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

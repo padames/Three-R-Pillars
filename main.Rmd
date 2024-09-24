@@ -1016,20 +1016,135 @@ is_positive <- c( X > 0 )
 X[is_positive]
 ```
 
+--
+
+```{r subset-by-logical-second-mask, highlight.output=TRUE, echo=c(3)}
+X <- c(5, -1, 3, 0, -4, 1)
+is_positive <- c( X > 0 )
+(is_gt_two <- c(X > 2) )
+```
+
+--
+```{r subset-by-logical-masks, highlight.output=TRUE, echo=c(4)}
+X <- c(5, -1, 3, 0, -4, 1)
+is_positive <- c( X > 0 )
+is_gt_two <- c(X > 2) 
+X[is_positive & is_gt_two]
+```
+
+
 ---
 class: top, left, show-only-last-code-result
 
 #Matrix subsetting
+
+- Create a demo matrix
+
+```{r matrix-creation-demo, highlight.output=TRUE}
+(M <- matrix(c(1:4,4:1), nrow = 4, ncol = 4))
+```
+--
+
+```{r subset-matrix-row, highlight.output=TRUE, echo=c(2)}
+M <- matrix(c(1:4,4:1), nrow = 4, ncol = 4)
+M[1,]  # subset the first row
+```
+
+--
+
+```{r subset-matrix-column, highlight.output=TRUE, echo=c(2)}
+M <- matrix(c(1:4,4:1), nrow = 4, ncol = 4)
+M[,4]  # subset the last column
+```
+
+--
+
+```{r subset-matrix-range, highlight.output=TRUE, echo=c(2)}
+M <- matrix(c(1:4,4:1), nrow = 4, ncol = 4)
+M[3:4,3:4]  # subset the bottom-right 2x2 submatrix
+```
 
 ---
 class: top, left, show-only-last-code-result
 
 #List subsetting
 
+- Create some party lists 
+
+```{r list-creation-demo-party-items, highlight.output=TRUE}
+(party_items = list( drinks = c("pop", "wine", "beer", "water"),
+                    furniture = c(chairs = 8, tables = 2, hammocks = 1)))
+```
+--
+
+```{r list-creation-demo-guest-list, highlight.output=TRUE, echo=c(2)}
+party_items = list( drinks = c("pop", "wine", "beer", "water"), furniture = c(chairs = 8, tables = 2, hammocks = 1))
+(guest_list <- list(guests = c("Uncle Bob", "Friendly neighbour", "Joe Best"), invited = c(F,F,T))) 
+```
+
 ---
 class: top, left, show-only-last-code-result
 
-#Data frame subsetting
+#List subsetting
+
+- Create the complete party lists 
+
+--
+
+```{r nested-list-creation, highlight.output=TRUE, echo=c(3)}
+party_items = list( drinks = c("pop", "wine", "beer", "water"),furniture = c(chairs = 8, tables = 2, hammocks = 1))
+guest_list <- list(who = c("Uncle Bob", "Friendly neighbour", "Joe Best"), invited = c(F,F,T))
+(to_do_list <- list(guests = guest_list, items = party_items))
+```
+
+--
+
+```{r subset-list-list, highlight.output=TRUE, echo=c(4)}
+party_items = list( drinks = c("pop", "wine", "beer", "water"),furniture = c(chairs = 8, tables = 2, hammocks = 1))
+guest_list <- list(who = c("Uncle Bob", "Friendly neighbour", "Joe Best"), invited = c(F,F,T))
+to_do_list <- list(guests = guest_list, items = party_items)
+to_do_list$items$drinks
+```
+
+--
+
+```{r subset-list-list-furniture, highlight.output=TRUE, echo=c(4)}
+party_items = list( drinks = c("pop", "wine", "beer", "water"),furniture = c(chairs = 8, tables = 2, hammocks = 1))
+guest_list <- list(who = c("Uncle Bob", "Friendly neighbour", "Joe Best"), invited = c(F,F,T))
+to_do_list <- list(guests = guest_list, items = party_items)
+to_do_list$items$furniture
+```
+
+--
+
+How many guests have been invited?
+--
+
+```{r subset-list-list-how-many-invited, highlight.output=TRUE, echo=c(4)}
+party_items = list( drinks = c("pop", "wine", "beer", "water"),furniture = c(chairs = 8, tables = 2, hammocks = 1))
+guest_list <- list(who = c("Uncle Bob", "Friendly neighbour", "Joe Best"), invited = c(F,F,T))
+to_do_list <- list(guests = guest_list, items = party_items)
+sum(to_do_list$guests$invited)
+```
+
+--
+
+Who is that guest?
+--
+
+```{r subset-list-list-invited, highlight.output=TRUE, echo=c(4)}
+party_items = list( drinks = c("pop", "wine", "beer", "water"),furniture = c(chairs = 8, tables = 2, hammocks = 1))
+guest_list <- list(who = c("Uncle Bob", "Friendly neighbour", "Joe Best"), invited = c(F,F,T))
+to_do_list <- list(guests = guest_list, items = party_items)
+to_do_list$guests$who[to_do_list$guests$invited]
+```
+
+---
+
+background-image: url('https://i.imgflip.com/123oks.jpg')
+background-position: 50% 50%
+class: center, bottom, inverse
+
 
 ---
 
@@ -1038,4 +1153,5 @@ class: center, middle
 # Thanks!
 
 ### Slides coerced, recycled, and subset via the R packages [**xaringan**](https://github.com/yihui/xaringan) and  [**xaringanthemer**](https://pkg.garrickadenbuie.com/xaringanthemer/)
+
 
