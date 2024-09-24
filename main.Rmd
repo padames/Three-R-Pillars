@@ -425,7 +425,6 @@ If we were to impute them, it'd be harder because we have lost the original cont
 
 ## that is information loss
 
-
 ---
 class: left, top, show-only-last-code-result
 
@@ -436,10 +435,10 @@ class: left, top, show-only-last-code-result
 
 --
 
-```{r, appending to lists, tidy=FALSE, highlight.output=T}
-(new_list <- c(l1=list( v1=LETTERS[2:5],
-                        v2=letters[c(1,20)]),
-               v1=c("a","3")))
+```{r, appending-to-lists, tidy=FALSE, highlight.output=T}
+(party_plan <- c(items=list( furniture=c("chairs", "tables", "hammocks"),
+                             drinks=c("pop", "beer", "wine", "water") ),
+               guests=c("Uncle Bob","Friendly neighbour", "Joe Best")))
 ```
 
 ???
@@ -459,15 +458,15 @@ Let's remember or basic R data structures: they also have a hierarchy!
 --
 
 ```{r, class-of-result, tidy=TRUE, echo=c(2), highlight.output=T}
-new_list <- c(l1=list( v1=LETTERS[2:5],v2=letters[c(1,20)]),v1=c("a","3"))
-typeof(new_list)
+(party_plan <- c(items=list( furniture=c("chairs", "tables", "hammocks"),drinks=c("pop", "beer", "wine", "water") ),guests=c("Uncle Bob","Friendly neighbour", "Joe Best")))
+typeof(party_plan)
 ```
 
 --
 
 ```{r, typeof-each-element, tidy=TRUE, echo=c(2), highlight.output=T}
-new_list <- c(l1=list( v1=LETTERS[2:5],v2=letters[c(1,20)]),v1=c("a","3"))
-c(typeof(new_list$l1.v1), typeof(new_list$l1.v2), typeof(new_list$v11), typeof(new_list$v12))
+(party_plan <- c(items=list( furniture=c("chairs", "tables", "hammocks"),drinks=c("pop", "beer", "wine", "water") ),guests=c("Uncle Bob","Friendly neighbour", "Joe Best")))
+c(typeof(party_plan$items.furniture), typeof(party_plan$items.drinks), typeof(party_plan$guests1), typeof(party_plan$guests2), typeof(party_plan$guests3))
 ```
 
 --
@@ -507,6 +506,11 @@ background-color: Black
 
 ???
 image credit: [i.pinimg.com](https://i.pinimg.com/736x/8a/3f/e8/8a3fe88ce369c46593ddcbf80b2570ce--really-funny-pictures-funniest-pictures.jpg)
+
+
+
+
+
 
 ---
 class: left, middle, inverse
