@@ -3,5 +3,6 @@
 .RData
 .Ruserdata
 git-push.sh
-.html
+*.html
 Ninja*
+*.bak
