@@ -5,3 +5,7 @@
 git-push.sh
 Ninja*
 *.bak
+.Rdata
+.httr-oauth
+.DS_Store
+.quarto
