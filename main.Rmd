@@ -773,7 +773,7 @@ t(A) %*% B        # [A]_1x3 . [B]_2x1 = [AB]_1x1
 ```{r outer-dot-vector-product-recycle, eval=TRUE, include=TRUE, highlight.output=T, tidy=T}
 A <- c(1, 0, 2)
 B <- c(3, 3)
-A %*% t(B)        # [A]_3x1 . [B]_1x2 = [AB]_3x3
+A %*% t(B)        # [A]_3x1 . [B]_1x2 = [AB]_3x2
 ```
 
 <img src="single-check_emoji-white-bkg.png"
