@@ -921,7 +921,7 @@ Source: [Wiktionary](https://www.wordnik.com/words/subset)
 
 
 ---
-background-image: url(http://www.quickmeme.com/img/06/06d85daad5e49420eee5ccefd597782ca7ad37c03a306458f5ee865e6d22a5b6.jpg)
+background-image: url(quickmeme-subset.jpg)
 background-position: 50% 50%
 background-size: 910px 682px
 
